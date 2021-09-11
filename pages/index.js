@@ -1,36 +1,53 @@
-import fs from 'fs'
+
+import {TOTAL_PAGES} from '../db'
 import Head from 'next/head'
-import styles from './home.module.scss'
-import Link from "next/link";
+import Link from 'next/link'
+import styles from './index.module.scss'
+import {useRouter} from "next/router";
+import classes from 'classnames'
+
 import {useEffect, useState, useReducer} from 'react'
 const randomPageNumber = (totalPages) => Math.floor((Math.random()*totalPages))
 
 export default function Home({totalPages}) {
+  const randomPage = Math.ceil(Math.random()*totalPages)
+  const router = useRouter()
+  const [start, setStart] = useState(false);
+  const [end, setEnd] = useState(false);
+  const [disapear, setDisapear] = useState(false);
+  const title = 'Cihenema';
+
+  const onClick = (e) => {
+    if(!start) return setStart(true)
+    setStart(false)
+    setEnd(true)
+    setTimeout(()=>setDisapear(true), 2000)
+    setTimeout(()=>router.push(`/new`), 5000)
+  }
+  useEffect(()=>router.prefetch('/new'), [])
   return (
       <>
       <Head>
-        <title>BebyJ</title>  
+        <link rel="shortcut icon" href="/favicon.png" />
+        <title>{title}</title>  
       </Head>
-      <main id="home" className={[styles.container, styles.home].join(' ')}>
-        <Link href={`/page/${randomPageNumber(totalPages)}`} onClick={()=>setLoading(true)}>
-          <a>
-            <div className={styles["lds-hourglass"]}></div>
+      <main id="home" className={classes(styles.container, styles.home, {[styles.end] : end})} onClick={onClick} >
+          <div class={classes(styles.homebg, {[styles.homebgfade] : end})}></div>
+          <a 
+            onClick={onClick} 
+            className={ classes({[styles.animate] : start}, {[styles.disapear] : disapear})}
+          >
+            {[...title].map((c, idx)=> <span className={classes({[styles.ca]:end}, {[styles[`ca${idx}`]] : end})}>{c}</span>)}
           </a>
-        </Link>
       </main>
     </>
   )
 }
 
-const POSTS_PER_PAGE = 10;
-const DB_FILE = './data/_posts.json'
-const db = fs.existsSync(DB_FILE) ? JSON.parse(fs.readFileSync(DB_FILE)) : []
-
 export async function getStaticProps(context) {
-  
   return { 
     props: {
-      totalPages:Math.ceil(db.length/10)
+      totalPages:TOTAL_PAGES
     }
   }
 }

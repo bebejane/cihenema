@@ -6,7 +6,7 @@ const {parse } = require('node-html-parser');
 
 const wp = new WPAPI({ endpoint: 'https://worldscinema.org/wp-json' });
 
-const POSTS_PER_PAGE = 100;
+const POSTS_PER_PAGE = 10;
 const FILE_NAME = 'posts.json'
 let db = fs.existsSync('./data/'+FILE_NAME) ? JSON.parse(fs.readFileSync('./data/'+FILE_NAME)) : []
 
@@ -33,7 +33,7 @@ async function scrape (){
 
   while(true){
     try{
-      let posts = await wp.posts().perPage(POSTS_PER_PAGE).page(page);
+      let posts = await wp.posts().perPage(100).page(page);
       if(lastPost){
         posts = posts.filter((p)=>new Date(p.date) > new Date(lastPost.date));
         if(!posts.length){
@@ -66,9 +66,12 @@ const parsePost = (p) => {
   const imdb = parseIMDB(p.content.rendered);
   const images = parseImages(p.content.rendered);
   const remove = ['[+Extra]', '[+Extras]', '(HD)', '[+ Extras]']
+  
+  
 
   let title = decode(p.title.rendered)
   remove.forEach(t => title = title.replace(t, ''))
+  title = title.replace(/[.*]/g, '')
 
   let year = title.endsWith(')') ? title.substring(title.length-5, title.length-1) : undefined
   let director = title.includes(' – ') ? title.substring(0, title.indexOf(' – ')) : undefined;
@@ -99,7 +102,7 @@ const parseImages = function(html){
   const root = parse(html);
   const images = root.querySelectorAll('img').map((i)=>i.getAttribute('src')).filter((i)=>i && !i.includes('29f7c043f76a2bde437fd0d52a185152.jpg'))
   return {
-    images : images.slice(1)
+    images : images.slice(1).map(i => i.replace('http://', 'https://'))
   }
 }
 const parseIMDB = function(html){
@@ -117,11 +120,21 @@ const parseIMDB = function(html){
 }
 function parseDB(){
   console.log('Parsing posts...')
+  const search = []
   let count = 0
   for (let index = 0; index < db.length; index++) {
     db[index] = parsePost(db[index])
+    search.push({
+      i: db[index].imdb, 
+      ten: db[index].titleEnglish || '', 
+      t: db[index].title || '', 
+      d: db[index].director || '', 
+      y: db[index].year || '',
+      p: Math.ceil(index/POSTS_PER_PAGE)
+    })
   }
   fs.writeFileSync('./data/_'+FILE_NAME, JSON.stringify(db))
+  fs.writeFileSync('./public/movies.json', JSON.stringify(search))
   console.log('Done parsing posts...')
 
 }
