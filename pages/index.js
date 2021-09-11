@@ -22,7 +22,7 @@ export default function Home({totalPages}) {
     setStart(false)
     setEnd(true)
     setTimeout(()=>setDisapear(true), 2000)
-    setTimeout(()=>router.push(`/new`), 5000)
+    setTimeout(()=>router.push(`/new`), 4500)
   }
   useEffect(()=>router.prefetch('/new'), [])
   return (

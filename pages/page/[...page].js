@@ -8,6 +8,7 @@ import { useWindowSize } from '@react-hook/window-size'
 import classes from 'classnames'
 import Fuse from 'fuse.js'
 import Router from 'next/router'
+import {useHotkeys} from  'react-hotkeys-hook'
 
 export default function Cinema({posts, images, page, totalPages, newest}) {
   
@@ -33,6 +34,8 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
   useEffect(async () => setTimeout(()=>setLoading(false),1000), [imageLoaded])
   useEffect(async () => setTimeout(()=>setHeartbeat(true),60000), [])
 
+  useHotkeys('s', ()=> setToggleSearch(toggleSearch => !toggleSearch))
+
   const handleLoad  = (e) => {
     preventClick(e)
   }
@@ -44,7 +47,7 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
   }
   const handleToggleSearch  = (e) => {
     setToggleSearch(!toggleSearch)
-    searchRef.current.focus()
+    //searchRef.current.focus()
   }
   
   return (
@@ -118,7 +121,9 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
                       <a target="_new">Youtube</a>
                     </Link>
                   </div>
+                  <div className={styles.close} onClick={()=>setShowExcerpt(false)}>×</div>
                 </div>
+                
               </>
             }
           </div>
@@ -126,7 +131,7 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
             return post.images.map((img, idx)=> 
               <div id={idx === 0 ? post.imdb : ''} className={styles.slide} key={idx} onClick={()=>setShowExcerpt(false)}>
                 <div className={styles.wrap}>
-                  <img loading={pidx== 0 && idx < 2 ? 'eager' : ''} onLoad={()=>setImageLoaded(pidx== 0 && idx == 0)}  src={img}/>
+                  <img loading={pidx== 0 && idx < 2 ? '' : ''} onLoad={()=>setImageLoaded(pidx== 0 && idx == 0)}  src={img}/>
                 </div>
               </div>
             )
@@ -141,8 +146,8 @@ const useSearch = () => {
   const [result, setResult] = useState({q:'', result:[]})
   const [fuse, setFuse] = useState(undefined)
   const [movies, setMovies] = useState([])
+  const [to, setTo] = useState(null)
   const MAX_RESULT = 30;
-  let to = null;
 
   useEffect(async ()=>{
     const res = await fetch('/movies.json')
@@ -155,12 +160,10 @@ const useSearch = () => {
   }, [])
 
   const setSearch = async (q) => {
-    if(fuse && q){
-      const result = fuse.search(q).slice(0, MAX_RESULT)
-      setResult({q, result})
-    }else{
-      setResult({q, result:[]})
-    }
+    setResult({q, result:[]})
+    clearTimeout(to)
+    const timeout = setTimeout(()=>setResult({q, result:fuse && q ? fuse.search(q).slice(0, MAX_RESULT) : []}),250)
+    setTo(timeout)
   }
   return [result, setSearch]
 }

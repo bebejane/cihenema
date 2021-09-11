@@ -11,7 +11,7 @@ $subheader-size: 20px;
 $subheader-size-big: 30px;
 
 $padding: 15px;
-$padding-big: 30px;
+$padding-big: 20px;
 
 .container {
 	font-family: "Abril Fatface", serif;
@@ -180,6 +180,20 @@ $padding-big: 30px;
 				}
 			}
 		}
+		.close{
+			position: absolute;
+			top:0px;
+			right:0px;
+			margin: $padding;
+			font-size: 40px;
+			@media screen and (min-width: 768px) {
+				margin: $padding-big;
+			}
+			&:hover{
+				color:#fff;
+				opacity: 0.8;
+			}
+		}
 	}
 	.pager {
 		position: fixed;
@@ -318,14 +332,12 @@ $padding-big: 30px;
 	flex-direction: column;
 	position: fixed;
 	top:0;
-	left:-320px;
-	max-width: 300px;
-	min-width: 300px;
-	margin:20px;
-	margin-top:10px;
-	margin-left:0px;
-
-	z-index: 10;
+	left:calc(-100% + 160px);
+	max-width: calc(100% - 180px);
+	min-width: calc(100% - 180px);
+	margin-top: 20px;
+	margin-left: 0px;
+	z-index: 3;
 	transition: left cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 	&.toggled{
 		left:0px !important;
@@ -402,7 +414,7 @@ $padding-big: 30px;
 		}
 	}
 	.searchToggle{
-		display: flex;
+		display: none;
 		position: absolute;
 		align-items: center;
 		justify-content: center;
