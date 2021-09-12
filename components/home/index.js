@@ -33,7 +33,7 @@ export default function Home({ totalPages }) {
 				<title>{title}</title>
 			</Head>
 			<main id="home" className={classes(styles.container, styles.home, { [styles.end]: end })} onClick={onClick}>
-				<div class={classes(styles.homebg, { [styles.homebgfade]: end })}></div>
+				<div className={classes(styles.homebg, { [styles.homebgfade]: end })}></div>
 				<a onClick={onClick} className={classes({ [styles.animate]: start }, { [styles.disapear]: disapear })}>
 					{[...title].map((c, idx) => (
 						<span className={classes({ [styles.ca]: end }, { [styles[`ca${idx}`]]: end })}>{c}</span>
