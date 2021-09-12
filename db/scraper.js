@@ -55,7 +55,7 @@ async function scrape (){
     }
   }
   db = db.sort((a,b)=>new Date(a.date) > new Date(b.date));
-  fs.writeFileSync('./data/'+FILE_NAME, JSON.stringify(db))
+  fs.writeFileSync('./db/'+FILE_NAME, JSON.stringify(db))
   parseDB()
   console.log('Done', db.length)
 }
