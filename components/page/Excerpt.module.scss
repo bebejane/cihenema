@@ -23,10 +23,7 @@
   &:hover {
   
   }
-  img {
-    background-color: red;
-    display: inline-block;
-  }
+  
   .name {
     font-weight: 700;
     white-space: nowrap;
@@ -67,10 +64,10 @@
     font-family: 'News Cycle', sans-serif;
     font-weight: 700;
     font-size: $text-size;
-    
+    text-align: justify;
     @include mq($from: tablet) {
       font-size: $text-size-big;
-      line-height: 2rem;
+      line-height: 2.3rem;
     }
     img {
       margin-left: 20px;
@@ -113,7 +110,10 @@
     right:0px;
     margin: calc(#{$padding}/2);
     font-size: 40px;
-    opacity: 0.8;
+    opacity: 0.7;
+    background-color: transparent;
+    color:#fff;
+    filter:invert(1);
     @include mq($from: tablet){
       margin: calc(#{$padding-big}/2);
       opacity: 0.3;

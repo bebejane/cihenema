@@ -24,7 +24,9 @@ export default function Excerpt({showExcerpt, setShowExcerpt, posts, index }){
                 <a target="_new">Youtube</a>
               </Link>
             </div>
-            <div className={styles.close} onClick={()=>setShowExcerpt(false)}>×</div>
+            <div className={styles.close} onClick={()=>setShowExcerpt(false)}>
+              <img src={'/images/close.svg'}/>
+            </div>
           </div>
         </>
       }
