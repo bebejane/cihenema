@@ -1,15 +1,16 @@
-import {useEffect, useState, useRef} from 'react'
+import styles from './index.module.scss'
 import Search from './Search'
 import Excerpt from './Excerpt'
 import Gallery from './Gallery'
 import Pager from './Pager'
+
+import {useEffect, useState, useRef} from 'react'
 import usePWA from '@/lib/hooks/usePWA';
 import useSearch from '@/lib/hooks/useSearch';
-
 import useScrollPosition from '@react-hook/window-scroll'
 import { useWindowSize } from '@react-hook/window-size'
 import { useHotkeys } from  'react-hotkeys-hook'
-import styles from './index.module.scss'
+
 import Head from 'next/head'
 import classes from 'classnames'
 
