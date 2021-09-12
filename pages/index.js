@@ -1,5 +1,5 @@
-import Home from '@/components/home';
 import {TOTAL_PAGES} from '../db'
+import Home from '@/components/home';
 
 export default Home;
 

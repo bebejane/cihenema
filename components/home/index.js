@@ -22,7 +22,7 @@ export default function Home({ totalPages }) {
 		setTimeout(() => router.push(`/page/${randomPage}`), 4500);
 	};
 	useEffect(() => router.prefetch(`/page/${randomPage}`), []);
-	
+
 	return (
 		<>
 			<Head>
@@ -33,7 +33,9 @@ export default function Home({ totalPages }) {
 				<div className={classes(styles.homebg, { [styles.homebgfade]: end })}></div>
 				<a onClick={onClick} className={classes({ [styles.animate]: start }, { [styles.disapear]: disapear })}>
 					{[...title].map((c, idx) => (
-						<span key={idx} className={classes({ [styles.ca]: end }, { [styles[`ca${idx}`]]: end })}>{c}</span>
+						<span key={idx} className={classes({ [styles.ca]: end }, { [styles[`ca${idx}`]]: end })}>
+							{c}
+						</span>
 					))}
 				</a>
 			</main>

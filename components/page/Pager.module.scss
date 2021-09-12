@@ -10,7 +10,6 @@
 		margin: $padding-big;
 	}
 	div {
-		
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -24,20 +23,18 @@
 		cursor: pointer;
 		font-weight: 700;
 		font-size: $subheader-size;
-		font-family: 'Noto Serif KR', serif;
-		color:#000;
+		font-family: "Noto Serif KR", serif;
+		color: #000;
 		@include mq($from: desktop) {
 			width: 80px;
 			height: 80px;
 			border-radius: 40px;
 			font-size: $subheader-size-big;
-			span{
-				
+			span {
 				margin-bottom: 0.2em;
 			}
 		}
-		span{
-			
+		span {
 			margin-bottom: 0.2em;
 		}
 		&:hover {
@@ -59,16 +56,16 @@
 		transform: scale(1.1);
 	}
 	25% {
-		transform: scale(.95);
+		transform: scale(0.95);
 	}
 	50% {
 		transform: scale(1.06);
 	}
 	68% {
-		transform: scale(.95);
+		transform: scale(0.95);
 	}
 	100% {
-		transform: scale(.95);	
+		transform: scale(0.95);
 	}
 }
 .lds-hourglass {
@@ -94,7 +91,7 @@
 	border-radius: 50%;
 	width: 0;
 	height: 0;
-	
+
 	box-sizing: border-box;
 	margin: 4px;
 	border: 22px solid #000;

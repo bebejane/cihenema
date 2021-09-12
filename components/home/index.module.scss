@@ -33,7 +33,7 @@
 		@include mq($from: desktop) {
 			font-size: $header-size-big;
 		}
-		color:red;
+		color: red;
 		user-select: none;
 	}
 }
