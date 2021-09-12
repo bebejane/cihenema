@@ -6,7 +6,7 @@
 	margin: $padding;
 	color: #000;
 	z-index: 100;
-	@include mq($from: desktop) {
+	@include mq($from: tablet) {
 		margin: $padding-big;
 	}
 	button {
@@ -27,7 +27,7 @@
 		cursor: pointer;
 		font-weight: 700;
 		
-		@include mq($from: desktop) {
+		@include mq($from: tablet) {
 			width: 80px;
 			height: 80px;
 			font-size: 30px;
