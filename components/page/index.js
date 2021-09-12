@@ -3,15 +3,15 @@ import Search from './Search'
 import Excerpt from './Excerpt'
 import Gallery from './Gallery'
 import Pager from './Pager'
+import usePWA from '@/lib/hooks/usePWA';
+import useSearch from '@/lib/hooks/useSearch';
 
 import useScrollPosition from '@react-hook/window-scroll'
 import { useWindowSize } from '@react-hook/window-size'
-import {useHotkeys} from  'react-hotkeys-hook'
-import usePWA from '@/lib/hooks/usePWA';
+import { useHotkeys } from  'react-hotkeys-hook'
 import styles from './index.module.scss'
 import Head from 'next/head'
 import classes from 'classnames'
-import Fuse from 'fuse.js'
 
 export default function Page({posts, images, page, totalPages, newest}) {
   const [pwa] = usePWA()
@@ -26,6 +26,7 @@ export default function Page({posts, images, page, totalPages, newest}) {
   const scrollY = useScrollPosition(30)
   const [width, height] = useWindowSize()
   const [search, setSearch] = useSearch()
+
   const idx = currentIndex(posts, scrollY, height);
   
   if( idx != index && idx < posts.length) 
@@ -58,7 +59,7 @@ export default function Page({posts, images, page, totalPages, newest}) {
       </Head>
       <main className={classes(styles.container, styles.scroll)} onClick={()=>setShowExcerpt(!showExcerpt)}>
         <Search {...{search, searchRef, toggleSearch, setToggleSearch, setSearch}} onClick={preventClick}/>
-        <Pager {...{handleLoad, nextPage, loading, page, heartbeat}}/>
+        <Pager {...{nextPage, loading, page, heartbeat}}/>
         <Excerpt {...{setShowExcerpt, showExcerpt, posts, index}}/>
         <Gallery {...{posts, setShowExcerpt, setImageLoaded}}/>
         {loading && <div className={styles.loader}></div>}
@@ -66,34 +67,6 @@ export default function Page({posts, images, page, totalPages, newest}) {
     </>
   )
 }
-
-const useSearch = () => {
-  const [result, setResult] = useState({q:'', result:[]})
-  const [fuse, setFuse] = useState(undefined)
-  const [movies, setMovies] = useState([])
-  const [to, setTo] = useState(null)
-  const MAX_RESULT = 30;
-
-  useEffect(async ()=>{
-    const res = await fetch('/movies.json')
-    const m = await res.json()
-    const options = {
-      includeScore: true,
-      keys: ['ten', 'd', 'y']
-    }
-    setFuse(new Fuse(m, options)) 
-  }, [])
-
-  const setSearch = async (q) => {
-    setResult({q, result:[]})
-    clearTimeout(to)
-    const timeout = setTimeout(()=>setResult({q, result:fuse && q ? fuse.search(q).slice(0, MAX_RESULT) : []}),250)
-    setTo(timeout)
-  }
-  return [result, setSearch]
-}
-
-const sleep = (ms) => {return new Promise((resolve)=>{setTimeout(()=>resolve(), ms)})}
 
 const currentIndex = function(posts, scrollY, height){
   const slide = scrollY/height;
