@@ -7,10 +7,10 @@ import {useRouter} from "next/router";
 import classes from 'classnames'
 
 import {useEffect, useState, useReducer} from 'react'
-const randomPageNumber = (totalPages) => Math.floor((Math.random()*totalPages))
+
 
 export default function Home({totalPages}) {
-  const randomPage = Math.ceil(Math.random()*totalPages)
+  const [randomPage] = useState(Math.ceil(Math.random()*totalPages))
   const router = useRouter()
   const [start, setStart] = useState(false);
   const [end, setEnd] = useState(false);
@@ -22,9 +22,12 @@ export default function Home({totalPages}) {
     setStart(false)
     setEnd(true)
     setTimeout(()=>setDisapear(true), 2000)
-    setTimeout(()=>router.push(`/new`), 4500)
+    setTimeout(()=>router.push(`/page/${randomPage}`), 4500)
   }
-  useEffect(()=>router.prefetch('/new'), [])
+  useEffect(()=>{
+    router.prefetch(`/page/${randomPage}`).then(()=> console.log(`cached page`))
+    window.scrollTo(0,1);
+  }, [])
   return (
       <>
       <Head>

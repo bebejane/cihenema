@@ -20,7 +20,7 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [heartbeat, setHeartbeat] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
-  const scrollY = useScrollPosition(60)
+  const scrollY = useScrollPosition(30)
   const [width, height] = useWindowSize()
   const [search, setSearch] = useSearch()
   const idx = currentIndex(posts, scrollY, height);
@@ -30,10 +30,10 @@ export default function Cinema({posts, images, page, totalPages, newest}) {
   if(scrollY > ((height*images)-(height*3)) && !heartbeat) 
     setHeartbeat(true)
   
+  useEffect(()=>window.scrollTo(0,1), [])
   useEffect(async () => setLoading(true), [page])
   useEffect(async () => setTimeout(()=>setLoading(false),1000), [imageLoaded])
   useEffect(async () => setTimeout(()=>setHeartbeat(true),60000), [])
-
   useHotkeys('s', ()=> setToggleSearch(toggleSearch => !toggleSearch))
 
   const handleLoad  = (e) => {
