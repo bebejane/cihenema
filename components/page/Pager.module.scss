@@ -6,7 +6,7 @@
 	margin: $padding;
 	color: #000;
 	z-index: 100;
-	@media screen and (min-width: 768px) {
+	@include mq($from: desktop) {
 		margin: $padding-big;
 	}
 	button {
@@ -15,19 +15,23 @@
 		align-items: center;
 		justify-content: center;
 		background-color: rgb(255, 0, 0);
-		border-radius: 40px;
+		
 		touch-action: manipulation;
-		width: 80px;
-		height: 80px;
-		font-size: $header-size;
+		width: 50px;
+		height: 50px;
+		font-size: 20px;
+		border-radius: 25px;
 		transition: 0.5s;
 		line-height: 0;
 		text-transform: uppercase;
 		cursor: pointer;
 		font-weight: 700;
 		
-		@media screen and (min-width: 768px) {
-			//font-size: $header-size-big;
+		@include mq($from: desktop) {
+			width: 80px;
+			height: 80px;
+			font-size: 30px;
+			border-radius: 40px;
 		}
 		&:hover {
 			@extend .heartbeat;
@@ -67,11 +71,16 @@
 .lds-hourglass {
 	display: inline-block;
 	position: relative;
-	width: 80px;
-	height: 80px;
+	width: 52px;
+	height: 52px;
 	background-color: red;
-	border-radius: 40px;
+	border-radius: 26px;
 	transition: 0.1s;
+	@include mq($from: tablet) {
+		width: 80px;
+		height: 80px;
+		border-radius: 40px;
+	}
 	&:active {
 		transform: scale(0.8);
 	}
@@ -82,11 +91,18 @@
 	border-radius: 50%;
 	width: 0;
 	height: 0;
-	margin: 8px;
+	
 	box-sizing: border-box;
-	border: 32px solid #000;
+	margin: 5px;
+	border: 22px solid #000;
 	border-color: #000 transparent #000 transparent;
 	animation: ldshourglass 2.5s infinite;
+
+	@include mq($from: tablet) {
+		margin: 8px;
+		border: 32px solid #000;
+		border-color: #000 transparent #000 transparent;
+	}
 }
 
 @keyframes ldshourglass {

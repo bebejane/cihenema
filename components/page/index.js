@@ -35,7 +35,7 @@ export default function Page({posts, images, page, totalPages, newest}) {
   
   useEffect(()=>window.scrollTo(0,1), [])
   useEffect(async () => setLoading(true), [page])
-  useEffect(async () => setTimeout(()=>setLoading(false),1000), [imageLoaded])
+  useEffect(async () => imageLoaded && setTimeout(()=>setLoading(false),500), [imageLoaded])
   useEffect(async () => setTimeout(()=>setHeartbeat(true),60000), [])
   useHotkeys('s', ()=> setToggleSearch(toggleSearch => !toggleSearch))
 
@@ -57,7 +57,7 @@ export default function Page({posts, images, page, totalPages, newest}) {
         <title>Cihenema</title>  
       </Head>
       <main className={classes(styles.container, styles.scroll)} onClick={()=>setShowExcerpt(!showExcerpt)}>
-        <Search {...{search, searchRef, toggleSearch, handleToggleSearch, setSearch}} onClick={preventClick}/>
+        <Search {...{search, searchRef, toggleSearch, setToggleSearch, setSearch}} onClick={preventClick}/>
         <Pager {...{handleLoad, nextPage, loading, page, heartbeat}}/>
         <Excerpt {...{setShowExcerpt, showExcerpt, posts, index}}/>
         <Gallery {...{posts, setShowExcerpt, setImageLoaded}}/>
