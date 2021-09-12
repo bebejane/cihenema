@@ -1,7 +1,7 @@
 import { TOTAL_PAGES, getPosts } from '../../db'
-import Cinema from '../page/[...page]'
+import Page from '@/components/page'
 
-export default Cinema;
+export default Page;
 
 export async function getStaticProps(context) {
   const posts = getPosts(1)

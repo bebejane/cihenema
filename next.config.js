@@ -1,10 +1,16 @@
-webpack: (config, { isServer }) => {
-  // Fixes npm packages that depend on `fs` module
-  if (!isServer) {
-    config.resolve.fallback = {
-      fs: false,
-    };
-  }
+const withPWA = require("next-pwa");
 
-  return config;
-}
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
+  sassOptions : {
+    includePaths: ['./components', './pages'],
+    prependData: `
+      @import "./styles/variables.scss";
+      @import "./styles/mq.scss";
+    `,
+  }
+});
