@@ -6,7 +6,7 @@ export default function Pager({handleLoad, nextPage, loading, page, heartbeat}){
   const buttonStyle = classes({[styles.heartbeat]:heartbeat})
   const loadingStyle = classes(styles["lds-hourglass"], styles.heartbeat)
   return (
-    <div className={styles.pager} onClick={handleLoad}>
+    <div className={styles.pager} onClick={ e => e.stopPropagation()}>
       <Link href={`/page/${nextPage}`}>
         <a>
           {!loading && <button className={buttonStyle}>{page}</button>}

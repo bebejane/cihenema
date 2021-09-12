@@ -40,9 +40,6 @@ export default function Page({posts, images, page, totalPages, newest}) {
   useEffect(async () => setTimeout(()=>setHeartbeat(true),60000), [])
   useHotkeys('s', ()=> setToggleSearch(toggleSearch => !toggleSearch))
 
-  const handleLoad  = (e) => {
-    preventClick(e)
-  }
   const preventClick  = (e) => {
     e.stopPropagation()
   }
