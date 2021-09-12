@@ -1,5 +1,5 @@
 import fs from 'fs'
-export const DB_FILE = './data/_posts.json'
+export const DB_FILE = './db.json'
 export const POSTS_PER_PAGE = 10;
 export const db = fs.existsSync(DB_FILE) ? JSON.parse(fs.readFileSync(DB_FILE)) : []
 export const TOTAL_PAGES = Math.ceil(db.length/POSTS_PER_PAGE);
