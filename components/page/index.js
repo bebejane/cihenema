@@ -34,20 +34,11 @@ export default function Page({posts, images, page, totalPages, newest}) {
   if(scrollY > ((height*images)-(height*3)) && !heartbeat) 
     setHeartbeat(true)
   
-  useEffect(()=>window.scrollTo(0,1), [])
   useEffect(async () => setLoading(true), [page])
   useEffect(async () => imageLoaded && setTimeout(()=>setLoading(false),500), [imageLoaded])
   useEffect(async () => setTimeout(()=>setHeartbeat(true),60000), [])
   useHotkeys('s', ()=> setToggleSearch(toggleSearch => !toggleSearch))
 
-  const preventClick  = (e) => {
-    e.stopPropagation()
-  }
-  const handleToggleSearch  = (e) => {
-    setToggleSearch(!toggleSearch)
-    //searchRef.current.focus()
-  }
-  
   return (
       <>
       <Head>
