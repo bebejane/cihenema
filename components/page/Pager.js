@@ -9,7 +9,7 @@ export default function Pager({handleLoad, nextPage, loading, page, heartbeat}){
     <div className={styles.pager} onClick={ e => e.stopPropagation()}>
       <Link href={`/page/${nextPage}`}>
         <a>
-          {!loading && <button className={buttonStyle}>{page}</button>}
+          {!loading && <div className={buttonStyle}><span>{page}</span></div>}
           {loading && <div className={loadingStyle}></div>} 
         </a>
       </Link>

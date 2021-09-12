@@ -33,7 +33,7 @@
 		@include mq($from: desktop) {
 			font-size: $header-size-big;
 		}
-		color: #fff;
+		color:red;
 		user-select: none;
 	}
 }
@@ -45,10 +45,10 @@
 	}
 }
 .disapear {
-	padding-right: 5vw;
+	padding-right: 15vw !important;
 	transition: 3s !important;
 	color: #000 !important;
-	padding-right: 100vw;
+	//padding-bottom: 100vh;
 	transform: scale(0) rotate(-90deg);
 }
 

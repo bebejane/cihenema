@@ -11,7 +11,7 @@
   color: #fff;
   width: 100%;
   padding: $padding;
-  @media screen and (min-width: 768px) {
+  @include mq($from: tablet) {
     padding: $padding-big;
   }
   &.toggled {
@@ -28,18 +28,19 @@
     display: inline-block;
   }
   .name {
-    
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
     font-size: $header-size;
     line-height: 1.3;
-    @media screen and (min-width: 768px) {
+    @include mq($from: tablet) {
       font-size: $header-size-big;
     }
   }
   .director {
+    font-weight: 500;
     margin-top: 0px;
     color: rgb(170, 170, 170);
     white-space: nowrap;
@@ -48,9 +49,12 @@
     width: 100%;
     line-height: 1.3;
     font-size: $subheader-size;
-    @media screen and (min-width: 768px) {
+    @include mq($from: tablet) {
       font-size: $subheader-size-big;
     }
+  }
+  .name, .director {
+    font-family: 'Noto Serif KR', serif;
   }
   .summary {
     display: none;
@@ -63,8 +67,10 @@
     font-family: 'News Cycle', sans-serif;
     font-weight: 700;
     font-size: $text-size;
-    @media screen and (min-width: 768px) {
+    
+    @include mq($from: tablet) {
       font-size: $text-size-big;
+      line-height: 2rem;
     }
     img {
       margin-left: 20px;
@@ -76,23 +82,22 @@
     font-style: italic;
     font-size: $text-size;
     color: #636363;
-    @media screen and (min-width: 768px) {
+    @include mq($from: tablet) {
       font-size: $text-size-big;
     }
   }
   .links{
-    
     transition: 0.5s;
-    font-family: "Abril Fatface", serif;
-    margin-top: 20px;
-      
+    margin-top: 1rem;
     a {
-      opacity: 0.3;	
-      color: #fff;
+      color:#636363;
       transition: 0.3s;
       
       &:hover{
-        opacity: 0.4;
+        color:#8a8a8a;
+      }
+      &:active{
+        color:#cecece;
       }
       &::after{
         content:" · ";
@@ -106,14 +111,16 @@
     position: absolute;
     top:0px;
     right:0px;
-    margin: $padding;
+    margin: calc(#{$padding}/2);
     font-size: 40px;
-    @media screen and (min-width: 768px) {
-      margin: $padding-big;
+    opacity: 0.8;
+    @include mq($from: tablet){
+      margin: calc(#{$padding-big}/2);
+      opacity: 0.3;
     }
     &:hover{
       color:#fff;
-      opacity: 0.8;
+      opacity: 0.5;
     }
   }
 }

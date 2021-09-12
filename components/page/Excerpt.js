@@ -14,7 +14,7 @@ export default function Excerpt({showExcerpt, setShowExcerpt, posts, index }){
             <div className={styles.links} onClick={e => e.stopPropagation()}>
               { posts[index].imdb &&
                 <Link href={'https://imdb.com/title/' + posts[index].imdb}>
-                  <a target="_new">IMDB</a>
+                  <a target="_new">Imdb</a>
                 </Link>
               }
               <Link href={`https://bitsearch.to/search?q=${(posts[index].titleEnglish || posts[index].title)} ${(posts[index].year || '')}`}>
