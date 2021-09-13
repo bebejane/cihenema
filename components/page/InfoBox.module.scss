@@ -15,8 +15,11 @@
 		padding: $padding-big;
 	}
 	&.toggled {
-		background-color: #000;	
-		div.summary {
+		background-color: #000;
+		.summary {
+			display: flex;
+		}
+		.icons{
 			display: flex;
 		}
 	}
@@ -102,19 +105,16 @@
 		}
 	}
 	.icons {
-		position: absolute;
-		display: flex;
+		display: none;
 		flex-direction: row;
-		top: 0px;
-		right: 0px;
-		margin: calc(#{$padding}/ 2);
+		justify-content: flex-end;
+		width: 100%;
 		font-size: 40px;
 		opacity: 0.7;
 		background-color: transparent;
 		color: #fff;
 		z-index: 1;
 		@include mq($from: desktop) {
-			margin: calc(#{$padding-big}/ 2);
 			&:hover {
 				color: #fff;
 			}
@@ -124,12 +124,12 @@
 			align-items: center;
 			justify-content: center;
 			font-size: 40px;
-			padding:3px;
+			padding: 3px;
 			opacity: 0.9;
-			margin-left:5px;
+			margin-left: 5px;
 			@include mq($from: desktop) {
 				opacity: 0.7;
-				margin-left:10px;
+				margin-left: 10px;
 				&:hover {
 					color: #fff;
 					opacity: 1;
@@ -137,7 +137,7 @@
 			}
 			img {
 				filter: invert(1);
-				margin:0;
+				margin: 0;
 				width: 18px;
 				height: 18px;
 				@include mq($from: desktop) {
@@ -146,19 +146,14 @@
 				}
 			}
 		}
-		.bookmark{
-			
-				filter: rotate(90deg);
-			
-			&.toggled{
+		.bookmark {
+			filter: rotate(90deg);
+			&.toggled {
 				opacity: 1;
 				background-color: rgb(69, 69, 69);
 			}
 		}
 		.close {
-			
 		}
-		
 	}
-	
 }

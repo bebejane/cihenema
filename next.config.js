@@ -5,7 +5,7 @@ module.exports = withPWA({
     mode: 'production',
     dest: "public",
     register: true,
-    skipWaiting: true,
+    skipWaiting:false,
   },
   sassOptions : {
     includePaths: ['./components', './pages'],

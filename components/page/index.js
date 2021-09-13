@@ -12,23 +12,31 @@ import { useEffect, useState, useRef } from "react";
 import useScrollPosition from "@react-hook/window-scroll";
 import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
+import version from '/VERSION'
 
 export default function Page({ posts, images, page, totalPages, newest }) {
-	const [pwa] = usePWA();
+	
+	
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
 	const [showInfo, setShowInfo] = useState(false);
 	const [showBookmarks, setShowBookmarks] = useState(false);
-
 	const [scrollPostIndex, setScrollPostIndex] = useState(undefined);
-
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const [heartbeat, setHeartbeat] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 	const [width, height] = useWindowSize();
 	const scrollY = useScrollPosition(30);
 	const post = scrollPostIndex != undefined ? posts[scrollPostIndex[Math.floor(scrollY+(height/2))]] : undefined
-
+	
+	const [pwaState] = usePWA();
+	useEffect(()=>{
+		console.log('pwaState', pwaState, version.ver)
+		if(pwaState === 'controlling'){
+			//if(confirm(`New version ${version.ver} of app available. Restart now?`))
+				window.location.reload()
+		}
+	}, [pwaState])
 	useEffect(() => setScrollPostIndex(getScrollPostIndex(posts, height)), [height]);
 	useEffect(() => setLoading(true), [page]);
 	useEffect(() => imageLoaded && setTimeout(() => setLoading(false), 500), [imageLoaded]);
@@ -36,9 +44,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
 	useHotkeys("esc", () => setShowInfo(false));
 
-	if (scrollY > height * images - height * 3 && !heartbeat) 
-		setHeartbeat(true);
-
+	if (scrollY > height * images - height * 3 && !heartbeat) setHeartbeat(true);
 	return (
 		<>
 			<Head>

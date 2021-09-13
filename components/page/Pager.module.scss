@@ -42,13 +42,13 @@
 			background-color: rgb(246, 0, 0);
 		}
 	}
-	transition: 0.1s;
+	transition: 0.3s;
 	&:active {
-		transform: scale(0.8);
+		transform: scale(0.7);
 	}
 }
 .heartbeat {
-	animation: heartbeat 1.2s infinite !important;
+	//animation: heartbeat 1.2s infinite !important;
 	animation-delay: 0.5s !important;
 }
 @keyframes heartbeat {

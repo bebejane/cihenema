@@ -20,11 +20,23 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>
+			<div className={styles.icons}>					
+				<div className={styles.find} onClick={() => setShowSearch(true)}>
+					<img title={`Press 'F'`} src={"/images/find.svg"} />
+				</div>
+				<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
+					<img title={`Press 'B'`} src={"/images/plus.svg"} />
+				</div>
+				<div className={styles.close} onClick={() => setShowInfo(false)}>
+					<img title={`Press 'ESC'`} src={"/images/close.svg"} />
+				</div>
+			</div>
 			<div className={styles.name}>{post.titleEnglish || post.title}</div>
 			<div className={styles.director}>
 				{post.director} · {post.year}
 			</div>
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
+				
 				<div>
 					{post.excerpt}
 					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.title}</span>}
@@ -45,17 +57,7 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 						<a target="_new">TPB</a>
 					</Link>
 				</div>
-				<div className={styles.icons}>					
-					<div className={styles.find} onClick={() => setShowSearch(true)}>
-						<img title={`Press 'F'`} src={"/images/find.svg"} />
-					</div>
-					<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
-						<img title={`Press 'B'`} src={"/images/plus.svg"} />
-					</div>
-					<div className={styles.close} onClick={() => setShowInfo(false)}>
-						<img title={`Press 'ESC'`} src={"/images/close.svg"} />
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	);
