@@ -1,5 +1,6 @@
 import styles from "./index.module.scss";
 import Head from "next/head";
+import {useRouter} from "next/router";
 import classes from "classnames";
 import Loader from "@/components/common/Loader";
 import Search from "./Search";
@@ -13,10 +14,11 @@ import useScrollPosition from "@react-hook/window-scroll";
 import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
 import version from '/VERSION'
+import router from "next/router";
 
 export default function Page({ posts, images, page, totalPages, newest }) {
 	
-	
+	const router  = useRouter()
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
 	const [showInfo, setShowInfo] = useState(false);
@@ -31,7 +33,6 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	
 	const [pwaState] = usePWA();
 	useEffect(()=>{
-		console.log('pwaState', pwaState, version.ver)
 		if(pwaState === 'controlling'){
 			//if(confirm(`New version ${version.ver} of app available. Restart now?`))
 				window.location.reload()
@@ -43,6 +44,13 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
 	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
 	useHotkeys("esc", () => setShowInfo(false));
+	useHotkeys("right", () => router.push(`/page/${page+1}`));
+	useHotkeys("left", () => router.push(`/page/${page-1}`));
+	useHotkeys("space", (e) => {
+		//e.preventDefault()
+		//window.scroll(0, height)
+	});
+	
 
 	if (scrollY > height * images - height * 3 && !heartbeat) setHeartbeat(true);
 	return (

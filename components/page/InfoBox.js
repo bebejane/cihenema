@@ -31,15 +31,16 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 					<img title={`Press 'ESC'`} src={"/images/close.svg"} />
 				</div>
 			</div>
-			<div className={styles.name}>{post.titleEnglish || post.title}</div>
+			<div className={styles.name}>
+				{post.title || post.titleEnglish }
+			</div>
 			<div className={styles.director}>
 				{post.director} · {post.year}
 			</div>
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
-				
 				<div>
 					{post.excerpt}
-					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.title}</span>}
+					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.titleEmglish}</span>}
 				</div>
 				<div className={styles.links} onClick={(e) => e.stopPropagation()}>
 					{post.imdb && (
@@ -47,13 +48,13 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 							<a target="_new">Imdb</a>
 						</Link>
 					)}
-					<Link href={`https://youtube.com/results?search_query=${post.titleEnglish || post.title} ${post.year || ""}`}>
+					<Link href={`https://youtube.com/results?search_query=${post.title} ${post.year || ""}`}>
 						<a target="_new">Youtube</a>
 					</Link>
-					<Link href={`https://bitsearch.to/search?q=${post.titleEnglish || post.title} ${post.year || ""}&category=1&subcat=2`}>
+					<Link href={`https://bitsearch.to/search?q=${post.title} ${post.year || ""}&category=1&subcat=2`}>
 						<a target="_new">Torrent</a>
 					</Link>
-					<Link href={`https://thepiratebay.org/search.php?q=${post.titleEnglish || post.title}&cat=201`}>
+					<Link href={`https://thepiratebay.org/search.php?q=${post.title}&cat=201`}>
 						<a target="_new">TPB</a>
 					</Link>
 				</div>
