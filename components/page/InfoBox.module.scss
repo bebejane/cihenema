@@ -1,4 +1,4 @@
-.excerpt {
+.info-box {
 	position: fixed;
 	display: flex;
 	flex-direction: column;
@@ -101,6 +101,37 @@
 			}
 		}
 	}
+	.favourite{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 40px;
+		position: absolute;
+		top: 0px;
+		right: 30px;
+		margin: calc(#{$padding}/ 2);
+		padding:3px;
+		img{
+			filter: invert(1);
+			margin:0;
+			width: 18px;
+			height: 18px;
+		}
+		@include mq($from: desktop) {
+			margin: calc(#{$padding-big}/ 2);
+			top: 0px;
+			opacity: 0.3;
+			&:hover {
+				color: #fff;
+				opacity: 0.5;
+			}
+		}
+		
+		&.toggled{
+			opacity: 1;
+			background-color: rgb(2, 96, 2);
+		}
+	}
 	.close {
 		position: absolute;
 		top: 0px;
@@ -114,10 +145,11 @@
 		@include mq($from: desktop) {
 			margin: calc(#{$padding-big}/ 2);
 			opacity: 0.3;
+			&:hover {
+				color: #fff;
+				opacity: 0.5;
+			}
 		}
-		&:hover {
-			color: #fff;
-			opacity: 0.5;
-		}
+		
 	}
 }

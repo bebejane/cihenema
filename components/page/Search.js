@@ -4,9 +4,10 @@ import classes from "classnames";
 import { useEffect } from "react";
 
 export default function Search({ searchRef, search, setSearch, toggleSearch, setToggleSearch }) {
+	
+	useEffect(() => search.q && !toggleSearch && setToggleSearch(true), [search]);
 	const containerStyle = classes(styles.search, { [styles.toggled]: toggleSearch });
 	const toggleStyle = classes(styles.searchToggle, { [styles.toggled]: toggleSearch });
-	useEffect(() => search.q && !toggleSearch && setToggleSearch(true), [search]);
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>

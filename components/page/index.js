@@ -3,7 +3,7 @@ import Head from "next/head";
 import classes from "classnames";
 import Loader from "@/components/common/Loader";
 import Search from "./Search";
-import Excerpt from "./Excerpt";
+import InfoBox from "./InfoBox";
 import Gallery from "./Gallery";
 import Pager from "./Pager";
 
@@ -26,6 +26,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const [toggleSearch, setToggleSearch] = useState(false);
 	const [width, height] = useWindowSize();
 	const [search, setSearch] = useSearch();
+	const [favourites, setFavourites] = useState([]);
 	const scrollY = useScrollPosition(30);
 
 	const idx = currentPostIndex(posts, scrollY, height);
@@ -37,6 +38,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useEffect(async () => imageLoaded && setTimeout(() => setLoading(false), 500), [imageLoaded]);
 	useEffect(async () => setTimeout(() => setHeartbeat(true), 60000), []);
 	useHotkeys("s", () => setToggleSearch((toggleSearch) => !toggleSearch));
+	useHotkeys("esc", () => setShowExcerpt(false));
 
 	return (
 		<>
@@ -44,11 +46,14 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>Cihenema</title>
 			</Head>
-			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowExcerpt(!showExcerpt)}>
-				<Search {...{ search, searchRef, toggleSearch, setToggleSearch, setSearch }} onClick={(e) => e.stopPropagation()} />
-				<Pager {...{ nextPage, loading, page, heartbeat }} />
-				<Excerpt {...{ setShowExcerpt, showExcerpt, post: posts[index], setSearch }} />
+			<main 
+				className={classes(styles.container, styles.scroll)} 
+				onClick={() => setShowExcerpt(!showExcerpt)
+			}>
 				<Gallery {...{ posts, setShowExcerpt, setImageLoaded }} />
+				<InfoBox {...{ setShowExcerpt, showExcerpt, post: posts[index], setSearch }} />
+				<Pager {...{ nextPage, loading, page, heartbeat }} />
+				<Search {...{ search, searchRef, toggleSearch, setToggleSearch, setSearch }}/>
 				<Loader loading={loading} />
 			</main>
 		</>
