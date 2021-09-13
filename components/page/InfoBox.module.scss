@@ -124,7 +124,7 @@
 			align-items: center;
 			justify-content: center;
 			font-size: 40px;
-			padding:1px;
+			padding:3px;
 			opacity: 0.9;
 			margin-left:5px;
 			@include mq($from: desktop) {
@@ -152,7 +152,7 @@
 			
 			&.toggled{
 				opacity: 1;
-				background-color: red;
+				background-color: rgb(69, 69, 69);
 			}
 		}
 		.close {

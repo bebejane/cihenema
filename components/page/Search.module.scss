@@ -14,9 +14,11 @@
     font-family: "Noto Serif KR", serif;
     font-size: $header-size;
     color:red;
-    
+    border:1px solid rgb(143, 0, 0);
+    border-bottom: 0px;
     @include mq($from: desktop) {
       font-size: $header-size-big;
+      padding-bottom: 3rem !important;
     }
     .close {
       position: absolute;
@@ -95,7 +97,8 @@
     height: 100%;
     margin:0;
     overflow-y: auto;
-    
+    border:1px solid rgb(143, 0, 0);
+    border-top: 0px;
     .item{
       margin-bottom: 1rem;
       a{
@@ -122,7 +125,7 @@
             white-space: pre;
             overflow:hidden;
             text-overflow: ellipsis;
-          
+            color:#aaaaaa;
             @include mq($from: desktop) {
               font-size: $text-size-big;
             }
@@ -136,7 +139,7 @@
     }
   }
   .header, .list{
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.9);
     padding: $padding;
     @include mq($from: desktop) {
       padding: $padding-big;

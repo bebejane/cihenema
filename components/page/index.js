@@ -17,7 +17,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const [pwa] = usePWA();
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
-	const [showExcerpt, setShowExcerpt] = useState(false);
+	const [showInfo, setShowInfo] = useState(false);
 	const [showBookmarks, setShowBookmarks] = useState(false);
 
 	const [scrollPostIndex, setScrollPostIndex] = useState(undefined);
@@ -34,9 +34,10 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useEffect(() => imageLoaded && setTimeout(() => setLoading(false), 500), [imageLoaded]);
 	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
 	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
-	useHotkeys("esc", () => setShowExcerpt(false));
+	useHotkeys("esc", () => setShowInfo(false));
 
-	if (scrollY > height * images - height * 3 && !heartbeat) setHeartbeat(true);
+	if (scrollY > height * images - height * 3 && !heartbeat) 
+		setHeartbeat(true);
 
 	return (
 		<>
@@ -44,9 +45,9 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>Cihenema</title>
 			</Head>
-			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowExcerpt(!showExcerpt)}>
-				<Gallery {...{ posts, setShowExcerpt, setImageLoaded, post }} />
-				<InfoBox {...{ setShowExcerpt, showExcerpt, post, setShowSearch }} />
+			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowInfo(!showInfo)}>
+				<Gallery {...{ posts, setShowInfo, setImageLoaded, post }} />
+				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch }} />
 				<Pager {...{ nextPage, loading, page, heartbeat }} />
 				<Search {...{ showSearch, setShowSearch }} />
 				<Bookmarks {...{ showBookmarks, setShowBookmarks }} />
@@ -64,7 +65,5 @@ const getScrollPostIndex = function (posts, height) {
 		for (let h = 0; h < (p.images.length*height) ; h++, px++)
 			scrollMap[px] = idx
 	})
-	//for (; px <= totalHeight;px++) scrollMap[px] = posts.length-1
-
 	return scrollMap
 };

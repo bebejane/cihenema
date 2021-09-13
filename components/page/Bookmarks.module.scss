@@ -14,10 +14,13 @@
     font-family: "Noto Serif KR", serif;
     font-size: $header-size;
     color:red;
-    
+    border:1px solid rgb(143, 0, 0);
+    border-bottom: 0px;
     @include mq($from: desktop) {
       font-size: $header-size-big;
+      padding-bottom: 3rem !important;
     }
+    
     .close {
       position: absolute;
       top: 0px;
@@ -56,7 +59,8 @@
     height: 100%;
     margin:0;
     overflow-y: auto;
-    
+    border:1px solid rgb(143, 0, 0);
+    border-top: 0px;
     .item{
       margin-bottom: 1rem;
       display: flex;
@@ -68,7 +72,6 @@
         flex-direction: row;
         flex: 1 1 auto;
         text-indent: 0px;
-      
         .title{
           font-family: "Noto Serif KR", serif;
           font-size: $subheader-size;
@@ -76,10 +79,8 @@
           white-space: pre;
           overflow:hidden;
           text-overflow: ellipsis;
-          
           @include mq($from: desktop) {
             font-size: $subheader-size-big;
-            
           }
           .director{
             font-size: $text-size;
@@ -87,7 +88,7 @@
             white-space: pre;
             overflow:hidden;
             text-overflow: ellipsis;
-          
+            color:#aaaaaa;
             @include mq($from: desktop) {
               font-size: $text-size-big;
             }

@@ -4,11 +4,11 @@ import classes from "classnames";
 import { useEffect, useState } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 
-export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch, setShowSearch}) {
+export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setShowSearch}) {
 
 	if(!post) return null
 
-	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showExcerpt });
+	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showInfo });
 	const [bookmarked, setBookmarked] = useState(false);
 
 	const toggleBook = (post) => {
@@ -26,7 +26,7 @@ export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch, 
 			</div>
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
-					{post.excerpt}
+					{post.Info}
 					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.title}</span>}
 				</div>
 				<div className={styles.links} onClick={(e) => e.stopPropagation()}>
@@ -52,7 +52,7 @@ export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch, 
 					<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
 						<img title={`Press 'B'`} src={"/images/plus.svg"} />
 					</div>
-					<div className={styles.close} onClick={() => setShowExcerpt(false)}>
+					<div className={styles.close} onClick={() => setShowInfo(false)}>
 						<img title={`Press 'ESC'`} src={"/images/close.svg"} />
 					</div>
 				</div>
