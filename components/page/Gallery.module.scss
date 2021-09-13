@@ -8,6 +8,7 @@
 		overflow: hidden;
 		position: relative;
 		img {
+			transition: 1s;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -18,6 +19,12 @@
 			&:first-child {
 				border-top: 0px;
 			}
+		}
+	}
+	&.outside{
+		& div > img {
+			filter: grayscale(1);
+			filter: sepia(1);
 		}
 	}
 }

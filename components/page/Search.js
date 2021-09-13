@@ -1,13 +1,15 @@
 import styles from "./Search.module.scss";
 import Link from "next/link";
 import classes from "classnames";
-import { useEffect } from "react";
+import useSearch from "@/lib/hooks/useSearch";
+import { useRef } from "react";
 
-export default function Search({ searchRef, search, setSearch, showSearch, setShowSearch }) {
-	
-	//useEffect(() => search.q  && setShowSearch(true), [search]);
+export default function Search({ showSearch, setShowSearch }) {
 	
 	if(!showSearch) return null
+
+	const searchRef = useRef();
+	const [search, setSearch] = useSearch();
 
 	return (
 			<div className={styles.search} onClick={(e) => e.stopPropagation()}>

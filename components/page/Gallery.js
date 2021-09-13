@@ -3,7 +3,7 @@ import styles from "./Gallery.module.scss";
 import { useRouter } from 'next/router'
 import classes from "classnames";
 
-export default function Gallery({ posts, setShowExcerpt, setImageLoaded,  }) {
+export default function Gallery({ posts, post = {}, setShowExcerpt, setImageLoaded, }) {
 	
 	const router = useRouter()
 	const imdbId = router.asPath.includes('#') ? router.asPath.substring(router.asPath.indexOf('#')+1) : null
@@ -14,10 +14,10 @@ export default function Gallery({ posts, setShowExcerpt, setImageLoaded,  }) {
 	
 	useEffect(() => setImageLoaded(firstLoaded), [firstLoaded]);
 	useEffect(() => setTimeout(()=> !firstLoaded && setFirstLoaded(true), 3000), [])
-	
-	return posts.map((post, pidx) => {
-		return post.images.map((img, idx) => (
-			<div id={idx === 0 ? post.imdb : ""} className={styles.slide} key={idx} onClick={() => setShowExcerpt(false)}>
+	//console.log(post.imdb)
+	return posts.map((p, pidx) => {
+		return p.images.map((img, idx) => (
+			<div id={idx === 0 ? p.imdb : ""} className={classes(styles.slide, {[styles.outside]:post.imdb !== p.imdb})} key={idx} onClick={() => setShowExcerpt(false)}>
 				<div className={styles.wrap}>
 					<img src={img} onLoad={() => !firstLoaded && setFirstLoaded(true)}/>
 				</div>

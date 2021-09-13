@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 
 export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch, setShowSearch}) {
+
+	if(!post) return null
+
 	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showExcerpt });
 	const [bookmarked, setBookmarked] = useState(false);
 
