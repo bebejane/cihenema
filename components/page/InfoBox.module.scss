@@ -11,7 +11,6 @@
 	color: #fff;
 	width: 100%;
 	padding: $padding;
-	
 	@include mq($from: desktop) {
 		padding: $padding-big;
 	}
@@ -102,39 +101,10 @@
 			}
 		}
 	}
-	.favourite{
+	.icons {
+		position: absolute;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 40px;
-		position: absolute;
-		top: 0px;
-		right: 30px;
-		margin: calc(#{$padding}/ 2);
-		padding:3px;
-		img{
-			filter: invert(1);
-			margin:0;
-			width: 18px;
-			height: 18px;
-		}
-		@include mq($from: desktop) {
-			margin: calc(#{$padding-big}/ 2);
-			top: 0px;
-			opacity: 0.3;
-			&:hover {
-				color: #fff;
-				opacity: 0.5;
-			}
-		}
-		
-		&.toggled{
-			opacity: 1;
-			background-color: rgb(2, 96, 2);
-		}
-	}
-	.close {
-		position: absolute;
+		flex-direction: row;
 		top: 0px;
 		right: 0px;
 		margin: calc(#{$padding}/ 2);
@@ -142,15 +112,53 @@
 		opacity: 0.7;
 		background-color: transparent;
 		color: #fff;
-		filter: invert(1);
+		z-index: 1;
 		@include mq($from: desktop) {
 			margin: calc(#{$padding-big}/ 2);
-			opacity: 0.3;
 			&:hover {
 				color: #fff;
-				opacity: 0.5;
 			}
+		}
+		& div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 40px;
+			padding:1px;
+			opacity: 0.9;
+			margin-left:5px;
+			@include mq($from: desktop) {
+				opacity: 0.7;
+				margin-left:10px;
+				&:hover {
+					color: #fff;
+					opacity: 1;
+				}
+			}
+			img {
+				filter: invert(1);
+				margin:0;
+				width: 18px;
+				height: 18px;
+				@include mq($from: desktop) {
+					width: 23px;
+					height: 23px;
+				}
+			}
+		}
+		.bookmark{
+			
+				filter: rotate(90deg);
+			
+			&.toggled{
+				opacity: 1;
+				background-color: red;
+			}
+		}
+		.close {
+			
 		}
 		
 	}
+	
 }

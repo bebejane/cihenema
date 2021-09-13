@@ -29,6 +29,7 @@
     "react-hotkeys-hook": "^3.4.0",
     "react-json-tree": "^0.15.0",
     "react-json-view": "^1.21.3",
+    "react-query": "^3.23.2",
     "sass": "^1.38.2",
     "swr": "^1.0.0",
     "vimdb": "^3.6.0",

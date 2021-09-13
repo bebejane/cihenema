@@ -123,14 +123,14 @@ function parseDB(){
   const search = []
   let count = 0
   for (let index = 0; index < db.length; index++) {
-    db[index] = parsePost(db[index])
+    db[index] = {...parsePost(db[index]), page: Math.ceil((index+1)/POSTS_PER_PAGE)}
     search.push({
       i: db[index].imdb, 
       ten: db[index].titleEnglish || '', 
       t: db[index].title || '', 
       d: db[index].director || '', 
       y: db[index].year || '',
-      p: Math.ceil(index/POSTS_PER_PAGE)
+      p: Math.ceil((index+1)/POSTS_PER_PAGE)
     })
   }
   fs.writeFileSync('./db/db.json', JSON.stringify(db))

@@ -6,7 +6,8 @@ import Search from "./Search";
 import InfoBox from "./InfoBox";
 import Gallery from "./Gallery";
 import Pager from "./Pager";
-
+import Bookmarks from "./Bookmarks";
+import { useRouter } from 'next/router'
 import { useEffect, useState, useRef } from "react";
 import usePWA from "@/lib/hooks/usePWA";
 import useSearch from "@/lib/hooks/useSearch";
@@ -15,18 +16,19 @@ import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
 
 export default function Page({ posts, images, page, totalPages, newest }) {
+	
 	const [pwa] = usePWA();
 	const searchRef = useRef();
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
 	const [showExcerpt, setShowExcerpt] = useState(false);
+	const [showBookmarks, setShowBookmarks] = useState(false);
 	const [index, setIndex] = useState(0);
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const [heartbeat, setHeartbeat] = useState(false);
-	const [toggleSearch, setToggleSearch] = useState(false);
+	const [showSearch, setShowSearch] = useState(false);
 	const [width, height] = useWindowSize();
 	const [search, setSearch] = useSearch();
-	const [favourites, setFavourites] = useState([]);
 	const scrollY = useScrollPosition(30);
 
 	const idx = currentPostIndex(posts, scrollY, height);
@@ -37,9 +39,10 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useEffect(async () => setLoading(true), [page]);
 	useEffect(async () => imageLoaded && setTimeout(() => setLoading(false), 500), [imageLoaded]);
 	useEffect(async () => setTimeout(() => setHeartbeat(true), 60000), []);
-	useHotkeys("s", () => setToggleSearch((toggleSearch) => !toggleSearch));
+	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
+	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
 	useHotkeys("esc", () => setShowExcerpt(false));
-
+	
 	return (
 		<>
 			<Head>
@@ -51,9 +54,10 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 				onClick={() => setShowExcerpt(!showExcerpt)
 			}>
 				<Gallery {...{ posts, setShowExcerpt, setImageLoaded }} />
-				<InfoBox {...{ setShowExcerpt, showExcerpt, post: posts[index], setSearch }} />
+				<InfoBox {...{ setShowExcerpt, showExcerpt, post: posts[index], setSearch, setShowSearch }} />
 				<Pager {...{ nextPage, loading, page, heartbeat }} />
-				<Search {...{ search, searchRef, toggleSearch, setToggleSearch, setSearch }}/>
+				<Search {...{ search, searchRef, showSearch, setShowSearch, setSearch }}/>
+				<Bookmarks {...{showBookmarks, setShowBookmarks}}/>
 				<Loader loading={loading} />
 			</main>
 		</>

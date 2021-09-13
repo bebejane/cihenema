@@ -2,25 +2,18 @@ import styles from "./InfoBox.module.scss";
 import Link from "next/link";
 import classes from "classnames";
 import { useEffect, useState } from "react";
+import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 
-const isFavourite = (id) => {
-	let favs = localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites")) : [];
-	return favs.includes(id);
-};
-
-export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch }) {
+export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch, setShowSearch}) {
 	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showExcerpt });
-	const [favourite, setFavourite] = useState(false);
+	const [bookmarked, setBookmarked] = useState(false);
 
-	const toggleFavourite = (id) => {
-		let favs = localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites")) : [];
-		if (!favs.includes(id)) favs.push(id);
-		else favs = favs.filter((i) => i !== id);
-		localStorage.setItem("favourites", JSON.stringify(favs));
-		setFavourite(isFavourite(id));
+	const toggleBook = (post) => {
+		toggleBookmark(post)
+		setBookmarked(isBookmarked(post.imdb));
 	};
 
-	useEffect(() => setFavourite(isFavourite(post.imdb)), [post]);
+	useEffect(() => setBookmarked(isBookmarked(post.imdb)), [post]);
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>
@@ -49,11 +42,16 @@ export default function InfoBox({ showExcerpt, setShowExcerpt, post, setSearch }
 						<a target="_new">TPB</a>
 					</Link>
 				</div>
-				<div className={styles.close} onClick={() => setShowExcerpt(false)}>
-					<img src={"/images/close.svg"} />
-				</div>
-				<div className={classes(styles.favourite, { [styles.toggled]: favourite })} onClick={() => toggleFavourite(post.imdb)}>
-					<img src={"/images/plus.svg"} />
+				<div className={styles.icons}>					
+					<div className={styles.find} onClick={() => setShowSearch(true)}>
+						<img title={`Press 'F'`} src={"/images/find.svg"} />
+					</div>
+					<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
+						<img title={`Press 'B'`} src={"/images/plus.svg"} />
+					</div>
+					<div className={styles.close} onClick={() => setShowExcerpt(false)}>
+						<img title={`Press 'ESC'`} src={"/images/close.svg"} />
+					</div>
 				</div>
 			</div>
 		</div>

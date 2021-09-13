@@ -19,6 +19,7 @@ body {
 a {
 	color: #fff;
 	text-decoration: none !important;
+	user-select: none;
 }
 
 a:hover {
@@ -28,4 +29,9 @@ a:hover {
 img {
 	max-width: 100%;
 	display: block;
+}
+
+::selection {
+  color:#000;
+  background-color:red;
 }

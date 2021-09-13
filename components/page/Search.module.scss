@@ -1,110 +1,148 @@
-.search {
-	display: flex;
-	flex-direction: column;
-	position: fixed;
-	top: 0;
-	left: calc(-100% + 160px);
-	max-width: calc(100% - 180px);
-	min-width: calc(100% - 180px);
-	margin-top: 20px;
-	margin-left: 0px;
-	z-index: 3;
-	transition: left cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
-	&.toggled {
-		left: 0px !important;
-		margin-left: 50px;
-	}
-	.searchForm {
-		position: relative;
-		input {
-			-webkit-appearance: none;
-			display: inline-block;
-			box-shadow: none;
-			color: #fff;
-			border: 0;
-			outline: none;
-			background: rgba(0, 0, 0, 0.4);
-			padding: 10px;
-			width: 100%;
-		}
-		.reset {
-			display: flex;
-			position: absolute;
-			align-items: center;
-			justify-content: center;
-			font-family: Arial, Helvetica, sans-serif;
-			font-weight: bold;
-			top: 0px;
-			right: 0px;
-			color: #fff;
-			font-size: 20px;
-			height: 36px;
-			width: 36px;
-			opacity: 0.5;
-			&:hover {
-				opacity: 0.8;
-			}
-		}
-	}
-	.results {
-		max-height: 300px;
-		overflow-y: auto;
-		scrollbar-width: none;
-		&::-webkit-scrollbar {
-			width: 0px !important;
-			display: none;
-		}
-		.item {
-			line-height: 1;
-			a {
-				display: flex;
-				flex-direction: row;
-				font-family: "News Cycle", sans-serif;
-				padding: 10px;
-				background: rgba(0, 0, 0, 0.3);
+.search{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 104;
+  padding:4%;
+  .header{
+    position: relative;
+    font-family: "Noto Serif KR", serif;
+    font-size: $header-size;
+    color:red;
+    
+    @include mq($from: desktop) {
+      font-size: $header-size-big;
+    }
+    .close {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      margin: calc(#{$padding}/ 2);
+      font-size: 40px;
+      opacity: 0.7;
+      background-color: transparent;
+      color: #fff;
+      filter: invert(1);
+      img{
+        width: 18px;
+        height: 18px;
+      }
+      @include mq($from: desktop) {
+        margin: calc(#{$padding-big}/ 2);
+        opacity: 0.3;
+        &:hover {
+          color: #fff;
+          opacity: 0.5;
+        }
+        img{
+          width: 23px;
+          height: 23px;
+        }
+      }
+    }
+    .searchForm {
+      position: relative;
+			margin-top:20px;
+      input {
+        -webkit-appearance: none;
+        display: inline-block;
+        box-shadow: none;
+        color: #fff;
+        border: 0;
+        outline: none;
+        background: rgba(255,255,255, 0.1);
+				box-sizing:border-box;
+        padding: 14px;
+        width: 100%;
+				font-size: $text-size;
+				@include mq($from: desktop) {
+					font-size: $text-size-big;
+					padding: 20px;
+				}
+      }
+      .reset {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        top: 0px;
+        right: 0px;
+        color: #fff;
+        font-size: 20px;
+        height: 36px;
+        width: 36px;
+        opacity: 0.5;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .list{
+    height:100%;
+    flex:1 1 auto;
+    text-indent: 0px;
+    list-style: none;
+    text-indent: 0;
+    width: 100%;
+    height: 100%;
+    margin:0;
+    overflow-y: auto;
+    
+    .item{
+      margin-bottom: 1rem;
+      a{
+        color:rgb(225, 225, 225);
+        display: flex;
+        flex-direction: row;
+        text-indent: 0px;
+      
+        .title{
+          font-family: "Noto Serif KR", serif;
+          font-size: $subheader-size;
+          flex: 1 1 auto;
+          white-space: pre;
+          overflow:hidden;
+          text-overflow: ellipsis;
+          
+          @include mq($from: desktop) {
+            font-size: $subheader-size-big;
+            
+          }
+          .director{
+            font-size: $text-size;
+            line-height: 2;
+            white-space: pre;
+            overflow:hidden;
+            text-overflow: ellipsis;
+          
+            @include mq($from: desktop) {
+              font-size: $text-size-big;
+            }
 
-				color: #fff;
-				border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-				&:hover {
-					background: rgba(0, 0, 0, 0.5);
-				}
-				.title {
-					flex: 1 1 auto;
-					margin-right: 20px;
-					text-overflow: ellipsis;
-					overflow: hidden;
-					.director {
-						display: block;
-						line-height: 1.3;
-						font-size: 14px;
-						color: gray;
-					}
-				}
-			}
-		}
-	}
-	.searchToggle {
-		display: none;
-		position: absolute;
-		align-items: center;
-		justify-content: center;
-		font-family: Arial, Helvetica, sans-serif;
-		font-weight: bold;
-		top: 0px;
-		right: -70px;
-		color: #fff;
-		//background-color: rgba(0,0,0,0.4);
-		font-size: 20px;
-		height: 36px;
-		width: 36px;
-		opacity: 0.5;
-		&:hover {
-			opacity: 0.8;
-		}
-		&.toggled {
-			transform: rotate(180deg);
-			right: unset;
-			left: -40px;
-		}
-	}
+          }
+          &:hover{
+            color:rgb(255, 255, 255);
+          }
+        }
+      }
+    }
+  }
+  .header, .list{
+    background-color: rgba(0,0,0,0.8);
+    padding: $padding;
+    @include mq($from: desktop) {
+      padding: $padding-big;
+    }
+  }
+  .list{
+    padding-top:0;
+  }
 }
