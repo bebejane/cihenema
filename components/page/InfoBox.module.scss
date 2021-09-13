@@ -11,11 +11,12 @@
 	color: #fff;
 	width: 100%;
 	padding: $padding;
+	
 	@include mq($from: desktop) {
 		padding: $padding-big;
 	}
 	&.toggled {
-		background-color: #000;
+		background-color: #000;	
 		div.summary {
 			display: flex;
 		}
