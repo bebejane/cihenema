@@ -26,7 +26,7 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 			</div>
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
-					{post.Info}
+					{post.excerpt}
 					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.title}</span>}
 				</div>
 				<div className={styles.links} onClick={(e) => e.stopPropagation()}>

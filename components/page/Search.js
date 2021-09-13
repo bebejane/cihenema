@@ -17,7 +17,7 @@ export default function Search({ showSearch, setShowSearch }) {
 					Search
 					<div className={styles.close} onClick={(e)=>setShowSearch(false)}><img src={"/images/close.svg"} /></div>
 					<form className={styles.searchForm} onSubmit={(e) => e.preventDefault()}>
-						<input ref={searchRef} placeholder={"Search..."} type="text" onChange={(e) => setSearch(e.target.value)} value={search.q} />
+						<input ref={searchRef} placeholder={"Wooords..."} type="text" onChange={(e) => setSearch(e.target.value)} value={search.q} />
 					</form>
 				</div>
 				<ul className={styles.list}>
