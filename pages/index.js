@@ -1,4 +1,4 @@
-import {TOTAL_PAGES} from '/db'
+import {TOTAL_PAGES} from '@/lib/db'
 import Home from '/components/home';
 
 export default Home;
