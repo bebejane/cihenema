@@ -21,6 +21,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const router  = useRouter()
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
+	const [deloading, setDeloading] = useState(false);
 	const [showInfo, setShowInfo] = useState(false);
 	const [showBookmarks, setShowBookmarks] = useState(false);
 	const [scrollPostIndex, setScrollPostIndex] = useState(undefined);
@@ -50,6 +51,12 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 		}
 	}, [pwaState])
 
+	const handleExit = () =>{
+		console.log('exit')
+		setDeloading(true)
+	}
+
+
 	return (
 		<>
 			<Head>
@@ -59,10 +66,10 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowInfo(!showInfo)}>
 				<Gallery {...{ posts, setShowInfo, setImageLoaded, post }} />
 				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch }} />
-				<Pager {...{ nextPage, loading, page, heartbeat }} />
+				<Pager {...{ nextPage, loading, page, heartbeat, onExit:handleExit }} />
 				<Search {...{ showSearch, setShowSearch }} />
 				<Bookmarks {...{ showBookmarks, setShowBookmarks }} />
-				<Loader loading={loading} />
+				<Loader loading={loading} deloading={deloading}/>
 			</main>
 		</>
 	);

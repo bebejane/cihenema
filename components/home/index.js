@@ -41,7 +41,7 @@ export default function Home({ totalPages }) {
 						</span>
 					))}
 				</a>
-				<Loader loading={!disapear}/>
+				<Loader loading={true}/>
 			</main>
 		</>
 	);
