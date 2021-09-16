@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import Head from "next/head";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import classes from "classnames";
 import Loader from "@/components/common/Loader";
 import InfoBox from "./InfoBox";
@@ -13,11 +13,10 @@ import { useEffect, useState, useRef } from "react";
 import useScrollPosition from "@react-hook/window-scroll";
 import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
-import version from '/VERSION'
+import version from "/VERSION";
 
 export default function Page({ posts, images, page, totalPages, newest }) {
-	
-	const router  = useRouter()
+	const router = useRouter();
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));
 	const [loading, setLoading] = useState(true);
 	const [deloading, setDeloading] = useState(false);
@@ -31,8 +30,11 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const [pwaState] = usePWA();
 	const scrollY = useScrollPosition(30);
 
-	const post = scrollPostIndex != undefined ? posts[scrollPostIndex[Math.floor(scrollY+(height/2))]] : undefined
-	const heartbeatTime = scrollY > height * images - height * 3 && !heartbeat
+	const post =
+		scrollPostIndex != undefined
+			? posts[scrollPostIndex[Math.floor(scrollY + height / 2)]]
+			: undefined;
+	const heartbeatTime = scrollY > height * images - height * 3 && !heartbeat;
 
 	useEffect(() => setHeartbeat(true), [heartbeatTime]);
 	useEffect(() => setScrollPostIndex(getScrollPostIndex(posts, height)), [height]);
@@ -41,20 +43,19 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
 	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
 	useHotkeys("esc", () => setShowInfo(false));
-	useHotkeys("right", () => router.push(`/page/${page+1}`));
-	useHotkeys("left", () => router.push(`/page/${page-1}`));
-	useEffect(()=>{
-		if(pwaState === 'controlling'){
+	useHotkeys("right", () => router.push(`/page/${page + 1}`));
+	useHotkeys("left", () => router.push(`/page/${page - 1}`));
+	useEffect(() => {
+		if (pwaState === "controlling") {
 			//if(confirm(`New version ${version.ver} of app available. Restart now?`))
-				window.location.reload()
+			window.location.reload();
 		}
-	}, [pwaState])
+	}, [pwaState]);
 
-	const handleExit = () =>{
-		console.log('exit')
-		setDeloading(true)
-	}
-
+	const handleExit = () => {
+		console.log("exit");
+		setDeloading(true);
+	};
 
 	return (
 		<>
@@ -62,25 +63,27 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<title>Cihenema</title>
 			</Head>
-			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowInfo(!showInfo)}>
+			<main
+				className={classes(styles.container, styles.scroll)}
+				onClick={() => setShowInfo(!showInfo)}
+			>
 				<Gallery {...{ posts, setShowInfo, setImageLoaded, post }} />
 				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch, setShowBookmarks }} />
-				<Pager {...{ nextPage, loading, page, heartbeat, onExit:handleExit }} />
+				<Pager {...{ nextPage, loading, page, heartbeat, onExit: handleExit }} />
 				<Search {...{ showSearch, setShowSearch }} />
 				<Bookmarks {...{ showBookmarks, setShowBookmarks }} />
-				<Loader loading={loading} deloading={deloading}/>
+				<Loader loading={loading} deloading={deloading} />
 			</main>
 		</>
 	);
 }
 
 const getScrollPostIndex = function (posts, height) {
-	const totalHeight = posts.reduce((acc, curr) => acc + curr.images.length)*height;
-	const scrollMap = {}
-	let px = 0
-	posts.forEach((p, idx)=>{
-		for (let h = 0; h < (p.images.length*height) ; h++, px++)
-			scrollMap[px] = idx
-	})
-	return scrollMap
+	const totalHeight = posts.reduce((acc, curr) => acc + curr.images.length) * height;
+	const scrollMap = {};
+	let px = 0;
+	posts.forEach((p, idx) => {
+		for (let h = 0; h < p.images.length * height; h++, px++) scrollMap[px] = idx;
+	});
+	return scrollMap;
 };

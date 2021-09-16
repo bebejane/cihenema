@@ -4,15 +4,21 @@ import classes from "classnames";
 import { useEffect, useState } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 
-export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setShowSearch, setShowBookmarks}) {
-
-	if(!post) return null
+export default function InfoBox({
+	showInfo,
+	setShowInfo,
+	post,
+	setSearch,
+	setShowSearch,
+	setShowBookmarks,
+}) {
+	if (!post) return null;
 
 	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showInfo });
 	const [bookmarked, setBookmarked] = useState(false);
 
 	const toggleBook = (post) => {
-		toggleBookmark(post)
+		toggleBookmark(post);
 		setBookmarked(isBookmarked(post.imdb));
 	};
 
@@ -20,31 +26,29 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>
-			<div className={styles.icons}>					
+			<div className={styles.icons}>
 				<div className={styles.find} onClick={() => setShowSearch(true)}>
 					<img title={`Press 'F'`} src={"/images/find.svg"} />
 				</div>
 				<div className={styles.find} onClick={() => setShowBookmarks(true)}>
 					<img title={`Press 'B'`} src={"/images/bookmark.svg"} />
 				</div>
-				<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
+				<div
+					className={classes(styles.bookmark, { [styles.toggled]: bookmarked })}
+					onClick={() => toggleBook(post)}
+				>
 					<img title={`Toggle bookmark`} src={"/images/plus.svg"} />
 				</div>
 				<div className={styles.close} onClick={() => setShowInfo(false)}>
 					<img title={`Press 'ESC'`} src={"/images/close.svg"} />
 				</div>
 			</div>
-			<div className={styles.name}>
-				{post.title}
-			</div>
+			<div className={styles.name}>{post.title}</div>
+			{post.titleEnglish && <div className={styles.nameorg}>{post.titleEnglish}</div>}
 			<div className={styles.director}>
 				{post.director} · {post.year}
 			</div>
-			{post.titleEnglish &&
-				<div className={styles.nameorg}>
-					AKA: {post.titleEnglish}
-				</div>
-			}
+
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
 					{post.excerpt}
@@ -59,7 +63,9 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 					<Link href={`https://youtube.com/results?search_query=${post.title} ${post.year || ""}`}>
 						<a target="_new">Youtube</a>
 					</Link>
-					<Link href={`https://bitsearch.to/search?q=${post.title} ${post.year || ""}&category=1&subcat=2`}>
+					<Link
+						href={`https://bitsearch.to/search?q=${post.title} ${post.year || ""}&category=1&subcat=2`}
+					>
 						<a target="_new">Torrent</a>
 					</Link>
 					<Link href={`https://thepiratebay.org/search.php?q=${post.title}&cat=201`}>

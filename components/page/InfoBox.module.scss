@@ -6,7 +6,7 @@
 	left: 0;
 	bottom: 0;
 	color: #fff;
-	
+
 	z-index: 1;
 	color: #fff;
 	width: 100%;
@@ -19,7 +19,7 @@
 		.summary {
 			display: flex;
 		}
-		.icons{
+		.icons {
 			display: flex;
 		}
 	}
@@ -79,11 +79,13 @@
 		font-style: italic;
 		font-size: $text-size;
 		color: #636363;
+
+		margin-bottom: 0.3rem;
 		@include mq($from: desktop) {
 			font-size: $text-size-big;
-			margin-top: 0.3rem;
+			line-height: 1.5rem;
+			margin-bottom: 0.5rem;
 		}
-		
 	}
 	.links {
 		transition: 0.5s;

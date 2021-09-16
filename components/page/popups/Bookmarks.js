@@ -5,22 +5,20 @@ import { useEffect, useState } from "react";
 import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 
 export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
-	
-  const [bookmarks, setBookmarks] = useState([])
-	
-	useEffect(()=>setBookmarks(getBookmarks()), [showBookmarks]);
+	const [bookmarks, setBookmarks] = useState([]);
+
+	useEffect(() => setBookmarks(getBookmarks()), [showBookmarks]);
 
 	const deleteBookmark = (post) => {
-		const marks = bookmarks.filter((b)=> b.imdb !== post.imdb )
-		toggleBookmark(post)
-		setBookmarks(marks)
-	}
+		const marks = bookmarks.filter((b) => b.imdb !== post.imdb);
+		toggleBookmark(post);
+		setBookmarks(marks);
+	};
 
-	
-  if(!showBookmarks) return null
-  console.log(showBookmarks, bookmarks)
+	if (!showBookmarks) return null;
+	console.log(showBookmarks, bookmarks);
 	return (
-		<PopUp header={'Bookmarks'} show={showBookmarks} setShow={setShowBookmarks}>
+		<PopUp header={"Bookmarks"} show={showBookmarks} setShow={setShowBookmarks}>
 			<ul className={styles.list}>
 				{bookmarks.map((m) => (
 					<li className={styles.item}>
@@ -28,11 +26,15 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 							<a>
 								<div className={styles.title}>
 									{m.titleEnglish || m.title}
-									<div className={styles.director}>{m.director} ({m.year})</div>
+									<div className={styles.director}>
+										{m.director} ({m.year})
+									</div>
 								</div>
 							</a>
 						</Link>
-						<div className={styles.delete} onClick={()=>deleteBookmark(m)}><img src={"/images/close.svg"} /></div>
+						<div className={styles.delete} onClick={() => deleteBookmark(m)}>
+							<img src={"/images/close.svg"} />
+						</div>
 					</li>
 				))}
 			</ul>

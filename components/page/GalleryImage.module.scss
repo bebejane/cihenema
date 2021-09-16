@@ -21,37 +21,37 @@
 			}
 		}
 	}
-	&.entry{
-    & div > img{
-      animation: entry 1s linear;
-      animation-fill-mode: forwards;
-    }
+	&.entry {
+		& div > img {
+			animation: entry 1s linear;
+			animation-fill-mode: forwards;
+		}
 	}
-  &.exit{
-    & div > img{
-      animation: exit 1s linear;
-      animation-fill-mode: forwards;
-    }
+	&.exit {
+		& div > img {
+			animation: exit 1s linear;
+			animation-fill-mode: forwards;
+		}
 	}
 }
 
 @keyframes entry {
-  0%{
-    filter: grayscale(1);
+	0% {
+		filter: grayscale(1);
 		filter: sepia(0.5);
-  }
-  100%{
-    filter: grayscale(0);
+	}
+	100% {
+		filter: grayscale(0);
 		filter: sepia(0);
-  }
+	}
 }
 @keyframes exit {
-  0%{
-    filter: grayscale(0);
+	0% {
+		filter: grayscale(0);
 		filter: sepia(0);
-  }
-  100%{
-    filter: grayscale(1);
+	}
+	100% {
+		filter: grayscale(1);
 		filter: sepia(0.5);
-  }
+	}
 }
