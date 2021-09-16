@@ -21,10 +21,10 @@ const introAnimation = {
 		"rgb(255,255,255)",
 		"rgb(255,255,255)",
 	],
-	y: [0, 0, 0, 0, 0, 0, 0, 0, 0, -2000],
+	y: [0, 0, 0, 0, 0, 0, 0, 0, -2000],
 };
 
-const introAnimationDuration = 7;
+const introAnimationDuration = 6;
 
 export default function Home({ totalPages }) {
 	const [pwa] = usePWA();
@@ -38,10 +38,9 @@ export default function Home({ totalPages }) {
 		//setRenderKey(Math.random())
 	};
 	useEffect(() => {
-		router.prefetch(`/page/${randomPage}`);
 		setTimeout(() => router.push(`/page/${randomPage}`), introAnimationDuration * 1000 + 300);
 	}, []);
-
+	
 	return (
 		<>
 			<Head>
@@ -52,7 +51,9 @@ export default function Home({ totalPages }) {
 				<main className={classes(styles.container)} onClick={onClick}>
 					<motion.div
 						key={renderKey}
+						initial="hidden"
 						animate={introAnimation}
+						style={{scale:0}}
 						transition={{ delay:0.5, duration: introAnimationDuration, ease: "easeOut", staggerChildren: 0.3 }}
 						onClick={onClick}
 					>
