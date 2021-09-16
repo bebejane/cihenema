@@ -9,7 +9,7 @@ import classes from "classnames";
 import { motion, useMotionValue } from "framer-motion";
 
 const introAnimation = {
-	scale: [0, 1, 0.96, 0.96, 0.1, 0.1],
+	scale: [0, 1, 0.9, 0.9, 0.1, 0.07],
 	rotate: [0, 0, 0, 0, 0, 0, -90, -90, -90, -90, -90],
 	color: [
 		"rgb(255,0,0)",
@@ -52,9 +52,8 @@ export default function Home({ totalPages }) {
 				<main className={classes(styles.container)} onClick={onClick}>
 					<motion.div
 						key={renderKey}
-						delay={1}
 						animate={introAnimation}
-						transition={{ duration: introAnimationDuration, ease: "easeOut", staggerChildren: 0.3 }}
+						transition={{ delay:0.5, duration: introAnimationDuration, ease: "easeOut", staggerChildren: 0.3 }}
 						onClick={onClick}
 					>
 						{[...title].map((c, idx) => (
@@ -68,7 +67,7 @@ export default function Home({ totalPages }) {
 					</motion.div>
 				</main>
 			</Link>
-			<Loader loading={true} sripes={30} />
+			<Loader loading={true} />
 		</>
 	);
 }

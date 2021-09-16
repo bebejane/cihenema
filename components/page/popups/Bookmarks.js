@@ -20,7 +20,7 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 	return (
 		<PopUp header={"Bookmarks"} show={showBookmarks} setShow={setShowBookmarks}>
 			<ul className={styles.list}>
-				{bookmarks.map((m) => (
+				{bookmarks.length ? bookmarks.map((m) => (
 					<li className={styles.item}>
 						<Link href={`/page/${m.page}#${m.imdb}`} prefetch={true}>
 							<a>
@@ -33,10 +33,15 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 							</a>
 						</Link>
 						<div className={styles.delete} onClick={() => deleteBookmark(m)}>
-							<img src={"/images/close.svg"} />
+							<img src={"/images/minus.svg"} />
 						</div>
 					</li>
-				))}
+				))
+				:
+					<div className={styles.empty}>
+						Nix hier...
+					</div>
+				}
 			</ul>
 		</PopUp>
 	);

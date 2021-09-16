@@ -38,6 +38,7 @@ export default function Loader({ loading, deloading }) {
 		<div className={styles.loader}>
 			{stripes.map((s, idx) => (
 				<div
+          key={idx}
 					className={classes(styles.stripe, styles[s.color], styles[s.animation])}
 					style={{ animationDuration: s.duration }}
 				></div>

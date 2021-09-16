@@ -1,4 +1,4 @@
-import { getPosts, TOTAL_PAGES } from "../../db";
+import { getPosts, TOTAL_PAGES } from "/db";
 import Page from "@/components/page";
 
 export default Page;
