@@ -1,6 +1,6 @@
 import styles from "./Search.module.scss";
 import Link from "next/link";
-import PopUp from "./PopUp";
+import PopUp from "./";
 import useSearch from "@/lib/hooks/useSearch";
 import { useRef } from "react";
 

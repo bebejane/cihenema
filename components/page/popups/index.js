@@ -1,4 +1,4 @@
-import styles from "./PopUp.module.scss";
+import styles from "./index.module.scss";
 
 export default function PopUp({ header, show, setShow, children}) {
 	

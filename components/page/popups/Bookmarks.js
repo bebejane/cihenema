@@ -1,6 +1,6 @@
 import styles from "./Bookmarks.module.scss";
 import Link from "next/link";
-import PopUp from "./PopUp";
+import PopUp from "./";
 import { useEffect, useState } from "react";
 import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 
