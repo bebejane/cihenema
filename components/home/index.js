@@ -9,7 +9,7 @@ import classes from "classnames";
 import { motion, useMotionValue } from "framer-motion";
 
 const introAnimation = {
-	scale: [0, 1, 0.9, 0.9, 0.1, 0.07],
+	scale: [0, 1, 0.9, 0.9, 0.1, 0.08],
 	rotate: [0, 0, 0, 0, 0, 0, -90, -90, -90, -90, -90],
 	color: [
 		"rgb(255,0,0)",
