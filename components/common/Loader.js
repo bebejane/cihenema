@@ -7,7 +7,7 @@ export default function Loader({loading, deloading}){
 
   const [loader, setLoader] = useState('loading')
   const [width, height] = useWindowSize();
-  const noStripes = width > 768 ? 51 : 21;
+  const noStripes = width > 768 ? 51 : 23;
   const duration = 1000;
 
   const stripes = new Array(noStripes).fill({}).map((s, i)=> { 

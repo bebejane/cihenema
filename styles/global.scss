@@ -10,8 +10,19 @@ body {
 	font-kerning: 10px;
 	font-size: 14px;
 	background-color: red;
+	overflow-y: scroll;
+	scrollbar-width: none;
 }
-
+::-webkit-scrollbar{
+	display: none;
+}
+::-webkit-scrollbar-track{
+	display: none;
+}
+::-moz-scrollbar {
+	display: none; 
+	
+}
 * {
 	box-sizing: border-box;
 }

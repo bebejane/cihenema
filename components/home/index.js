@@ -1,31 +1,36 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Loader from '@/components/common/Loader'
-
 import Head from "next/head";
 import usePWA from "@/lib/hooks/usePWA";
 import styles from "./index.module.scss";
 import classes from "classnames";
+import { motion, useMotionValue } from "framer-motion";
+
+const introAnimation = { 
+	scale:	[0, 0, 0.2, 0.3, 0.4, 1, 1,1,1, 1, 0.1, 0.1],
+	rotate:	[0, 0, 0, 0, 0, 0, 0, 0, 0 -90, -90, -90],
+	color:	['rgb(255,0,0)','rgb(255,0,0)','rgb(255,0,0)','rgb(255,0,0)','rgb(255,0,0)','rgb(255,255,255)','rgb(255,255,255)','rgb(255,255,255)','rgb(255,255,255)','rgb(255,255,255)','rgb(255,255,255)'],
+	y:			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2000],
+}
+const introAnimationDuration  = 5;
 
 export default function Home({ totalPages }) {
 	const [pwa] = usePWA();
 	const [randomPage] = useState(Math.ceil(Math.random() * totalPages));
 	const router = useRouter();
-	const [start, setStart] = useState(false);
-	const [end, setEnd] = useState(false);
-	const [disapear, setDisapear] = useState(false);
+	const [renderKey, setRenderKey] = useState(1);
 	const title = "Cihenema";
 
 	const onClick = (e) => {
-		if (!start) 
-			return setStart(true);
-		setStart(false);
-		setEnd(true);
-		setTimeout(() => setDisapear(true), 2000);
-		setTimeout(() => router.push(`/page/${randomPage}`), 4500);
-	};
+		//router.push(`/page/${randomPage}`)
+		setRenderKey(Math.random())
 
-	useEffect(() => router.prefetch(`/page/${randomPage}`), []);
+	};
+	useEffect(() => {
+		router.prefetch(`/page/${randomPage}`)
+		setTimeout(()=>router.push(`/page/${randomPage}`), introAnimationDuration*1000)
+	}, []);
 	
 	return (
 		<>
@@ -33,16 +38,21 @@ export default function Home({ totalPages }) {
 				<link rel="shortcut icon" href="/favicon.png" />
 				<title>{title} - Start</title>
 			</Head>
-			<main className={classes(styles.container, styles.home, { [styles.end]: end })} onClick={onClick}>
-				<a onClick={onClick} className={classes({ [styles.animate]: start }, { [styles.disapear]: disapear })}>
+			<main className={classes(styles.container)} onClick={onClick}>
+				<motion.div 
+					key={renderKey}
+					delay={1}
+					animate={introAnimation}
+					transition={{ duration: introAnimationDuration, ease: "easeOut", staggerChildren: 0.3 }}
+					onClick={onClick} >
 					{[...title].map((c, idx) => (
-						<span key={idx} className={classes({ [styles.ca]: end }, { [styles[`ca${idx}`]]: end })}>
+						<span key={idx} className={classes({ [styles.ca]: true }, { [styles[`ca${idx}`]]: true })}>
 							{c}
 						</span>
 					))}
-				</a>
-				<Loader loading={true}/>
+				</motion.div>
 			</main>
+			<Loader loading={true} sripes={30}/>
 		</>
 	);
 }

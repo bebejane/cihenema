@@ -14,7 +14,7 @@ export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, 
 	const gotToNextPage = () =>{
 		setClicked(true)
 		onExit(true)
-		setTimeout(()=>router.push(`/page/${nextPage}`), 1000)
+		setTimeout(()=>router.push(`/page/${nextPage}`), 1300)
 	}
 
 	return (

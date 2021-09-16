@@ -3,33 +3,20 @@
 
 .container {
 	font-family: "Abril Fatface", serif;
-	background-color: red;
-	width: 100%;
-	height: 100%;
 	position: absolute;
-	top: 0;
-	left: 0;
-	line-height: 1.3em;
-	cursor: pointer;
-	overflow: hidden;
-}
-.home {
+	left:0;
+	right: 0;
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	padding-right: 10vw;
-	transition: 2s;
-	z-index: 2;
-	background-color:red;
-	a {
-		position: absolute;
-		z-index: 1000;
-		transition: 1.2s;
+	cursor: pointer;
+	overflow: hidden;
+	z-index: 100000;
+	div {			
 		font-size: $header-size;
-		line-height: 20;
 		@include mq($from: desktop) {
 			font-size: $header-size-big;
 		}
@@ -37,24 +24,10 @@
 		user-select: none;
 	}
 }
-.animate {
-	font-size: 15vw !important;
-	color: red !important;
-	&:active {
-		color: #000 !important;
-	}
-}
-.disapear {
-	padding-right: 15vw !important;
-	transition: 3s !important;
-	color: #000 !important;
-	//padding-bottom: 100vh;
-	transform: scale(0) rotate(-90deg);
-}
+
 
 .ca {
-	transition: 2s !important;
-	color: #000;
+	filter: scale(0.1);
 }
 .ca0 {
 	transition: 1s !important;
@@ -87,24 +60,4 @@
 .ca7 {
 	transition: 2s !important;
 	font-size: 10vw !important;
-}
-.end {
-	//transform:scale(1.5);
-	padding-right: 0px !important;
-}
-
-.homebg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: repeating-linear-gradient(90deg, red, red 20px, #000 20px, #000 40px);
-	opacity: 0;
-	transition: 2s;
-	z-index: 1;
-}
-
-.homebgfade {
-	opacity: 1;
 }

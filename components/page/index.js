@@ -14,7 +14,6 @@ import useScrollPosition from "@react-hook/window-scroll";
 import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
 import version from '/VERSION'
-import router from "next/router";
 
 export default function Page({ posts, images, page, totalPages, newest }) {
 	
