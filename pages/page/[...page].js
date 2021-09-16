@@ -5,10 +5,11 @@ export default Page;
 
 export async function getStaticPaths() {
 	const paths = [];
-	for (let index = 0; index < TOTAL_PAGES; index++) paths.push({ params: { page: ["" + (index + 1)] } });
+	for (let index = 0; index < TOTAL_PAGES; index++) 
+		paths.push({ params: { page: ["" + (index + 1)] } });
 
 	return {
-		paths: paths,
+		paths:paths,
 		fallback: false,
 	};
 }
