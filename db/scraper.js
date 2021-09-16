@@ -7,7 +7,7 @@ const {parse } = require('node-html-parser');
 const wp = new WPAPI({ endpoint: 'https://worldscinema.org/wp-json' });
 
 const POSTS_PER_PAGE = 10;
-const FILE_NAME = 'db.json'
+const FILE_NAME = 'posts.json'
 let db = fs.existsSync('./db/'+FILE_NAME) ? JSON.parse(fs.readFileSync('./db/'+FILE_NAME)) : []
 
 function find(slug){
@@ -41,7 +41,7 @@ async function scrape (){
           break;
         }
       }
-      db.push.apply(db, posts.map((p) => parsePost(p)))
+      db.push.apply(db, posts)
       console.log(page, posts.length, db.length)
       page++
       await sleep(500)
@@ -56,7 +56,7 @@ async function scrape (){
   }
   db = db.sort((a,b)=>new Date(a.date) > new Date(b.date));
   fs.writeFileSync('./db/'+FILE_NAME, JSON.stringify(db))
-  //parseDB()
+  parseDB()
   console.log('Done', db.length)
 }
 
