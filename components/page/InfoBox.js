@@ -8,7 +8,6 @@ export default function InfoBox({
 	showInfo,
 	setShowInfo,
 	post,
-	setSearch,
 	setShowSearch,
 	setShowBookmarks,
 }) {
@@ -48,11 +47,9 @@ export default function InfoBox({
 			<div className={styles.director}>
 				{post.director} · {post.year}
 			</div>
-
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
 					{post.excerpt}
-					{post.titleEnglish && <span className={styles.nameorg}>aka: {post.titleEmglish}</span>}
 				</div>
 				<div className={styles.links} onClick={(e) => e.stopPropagation()}>
 					{post.imdb && (

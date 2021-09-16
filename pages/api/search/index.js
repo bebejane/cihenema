@@ -1,4 +1,4 @@
-import {db, TOTAL_PAGES, POSTS_PER_PAGE} from '../../../db'
+import {db, TOTAL_PAGES, POSTS_PER_PAGE} from '@/lib/db'
 import Fuse from 'fuse.js'
 
 const options = {

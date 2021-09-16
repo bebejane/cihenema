@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "cihenema",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,9 +19,6 @@
     "fs": "^0.0.1-security",
     "fuse.js": "^6.4.6",
     "html-entities": "^2.3.2",
-    "imdb-scraper": "^2.0.2",
-    "imdb-scrapper": "^2.3.1",
-    "lunr": "^2.3.9",
     "next": "^11.1.0",
     "next-pwa": "^5.3.1",
     "node-html-parser": "^4.1.4",
@@ -29,12 +26,11 @@
     "react-dom": "17.0.2",
     "react-hotkeys-hook": "^3.4.0",
     "react-intersection-observer": "^8.32.1",
-    "react-json-tree": "^0.15.0",
-    "react-json-view": "^1.21.3",
     "react-query": "^3.23.2",
     "sass": "^1.38.2",
-    "swr": "^1.0.0",
-    "vimdb": "^3.6.0",
+    "swr": "^1.0.0"
+  },
+  "devDependencies": {
     "wpapi": "^1.2.2"
   }
 }

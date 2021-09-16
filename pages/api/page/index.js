@@ -1,4 +1,4 @@
-import {db, TOTAL_PAGES, POSTS_PER_PAGE} from '../../../db'
+import {db, TOTAL_PAGES, POSTS_PER_PAGE} from '@/lib/db'
 
 export default function handler(req, res) {
   const p = !req.query.page || isNaN(req.query.page) ? 1 :  Array.isArray(req.query.page) ? req.query.page[0] : req.query.page
