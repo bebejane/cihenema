@@ -27,7 +27,7 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
         <div className={styles.close} onClick={(e)=>setShowBookmarks(false)}><img src={"/images/close.svg"} /></div>
       </div>
 			<ul className={styles.list}>
-				{bookmarks.map((m) => (
+				{bookmarks.reverse().map((m) => (
 					<li className={styles.item}>
 						<Link href={`/page/${m.page}#${m.imdb}`} prefetch={true}>
 							<a>

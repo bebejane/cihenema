@@ -4,7 +4,7 @@ import classes from "classnames";
 import { useEffect, useState } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 
-export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setShowSearch}) {
+export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setShowSearch, setShowBookmarks}) {
 
 	if(!post) return null
 
@@ -24,8 +24,11 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 				<div className={styles.find} onClick={() => setShowSearch(true)}>
 					<img title={`Press 'F'`} src={"/images/find.svg"} />
 				</div>
+				<div className={styles.find} onClick={() => setShowBookmarks(true)}>
+					<img title={`Press 'B'`} src={"/images/bookmark.svg"} />
+				</div>
 				<div className={classes(styles.bookmark, { [styles.toggled]: bookmarked })} onClick={() => toggleBook(post)}>
-					<img title={`Press 'B'`} src={"/images/plus.svg"} />
+					<img title={`Toggle bookmark`} src={"/images/plus.svg"} />
 				</div>
 				<div className={styles.close} onClick={() => setShowInfo(false)}>
 					<img title={`Press 'ESC'`} src={"/images/close.svg"} />
@@ -58,7 +61,6 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 						<a target="_new">TPB</a>
 					</Link>
 				</div>
-				
 			</div>
 		</div>
 	);

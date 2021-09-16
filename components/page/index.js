@@ -65,7 +65,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 			</Head>
 			<main className={classes(styles.container, styles.scroll)} onClick={() => setShowInfo(!showInfo)}>
 				<Gallery {...{ posts, setShowInfo, setImageLoaded, post }} />
-				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch }} />
+				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch, setShowBookmarks }} />
 				<Pager {...{ nextPage, loading, page, heartbeat, onExit:handleExit }} />
 				<Search {...{ showSearch, setShowSearch }} />
 				<Bookmarks {...{ showBookmarks, setShowBookmarks }} />
