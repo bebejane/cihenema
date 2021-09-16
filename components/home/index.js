@@ -31,7 +31,7 @@ export default function Home({ totalPages }) {
 		<>
 			<Head>
 				<link rel="shortcut icon" href="/favicon.png" />
-				<title>{title}</title>
+				<title>{title} - Start</title>
 			</Head>
 			<main className={classes(styles.container, styles.home, { [styles.end]: end })} onClick={onClick}>
 				<a onClick={onClick} className={classes({ [styles.animate]: start }, { [styles.disapear]: disapear })}>
