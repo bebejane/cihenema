@@ -1,4 +1,5 @@
 import fs from 'fs'
+console.log('DB dir', `${process.cwd()}/db/db.json`)
 export const DB_FILE = `${process.cwd()}/db/db.json`
 export const POSTS_PER_PAGE = 10;
 export const db = fs.existsSync(DB_FILE) ? JSON.parse(fs.readFileSync(DB_FILE)) : []
