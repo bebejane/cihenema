@@ -37,7 +37,7 @@
 @keyframes entry {
   0%{
     filter: grayscale(1);
-		filter: sepia(1);
+		filter: sepia(0.5);
   }
   100%{
     filter: grayscale(0);
@@ -51,6 +51,6 @@
   }
   100%{
     filter: grayscale(1);
-		filter: sepia(1);
+		filter: sepia(0.5);
   }
 }

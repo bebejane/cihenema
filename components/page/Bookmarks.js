@@ -1,6 +1,6 @@
 import styles from "./Bookmarks.module.scss";
 import Link from "next/link";
-import classes from "classnames";
+import PopUp from "./PopUp";
 import { useEffect, useState } from "react";
 import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
 
@@ -11,23 +11,18 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 	useEffect(()=>setBookmarks(getBookmarks()), [showBookmarks]);
 
 	const deleteBookmark = (post) => {
-		const _bookmarks = bookmarks.filter((b)=> b.imdb !== post.imdb )
+		const marks = bookmarks.filter((b)=> b.imdb !== post.imdb )
 		toggleBookmark(post)
-		setBookmarks(_bookmarks)
-		
+		setBookmarks(marks)
 	}
 
-
+	
   if(!showBookmarks) return null
-  
+  console.log(showBookmarks, bookmarks)
 	return (
-		<div className={styles.bookmarks} onClick={(e) => e.stopPropagation()}>
-      <div className={styles.header}>
-        Bookmarks
-        <div className={styles.close} onClick={(e)=>setShowBookmarks(false)}><img src={"/images/close.svg"} /></div>
-      </div>
+		<PopUp header={'Bookmarks'} show={showBookmarks} setShow={setShowBookmarks}>
 			<ul className={styles.list}>
-				{bookmarks.reverse().map((m) => (
+				{bookmarks.map((m) => (
 					<li className={styles.item}>
 						<Link href={`/page/${m.page}#${m.imdb}`} prefetch={true}>
 							<a>
@@ -41,6 +36,6 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 					</li>
 				))}
 			</ul>
-		</div>
+		</PopUp>
 	);
 }
