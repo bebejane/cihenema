@@ -6,7 +6,7 @@
 	left: 0;
 	bottom: 0;
 	color: #fff;
-	cursor: pointer;
+	
 	z-index: 1;
 	color: #fff;
 	width: 100%;
@@ -81,7 +81,9 @@
 		color: #636363;
 		@include mq($from: desktop) {
 			font-size: $text-size-big;
+			margin-top: 0.3rem;
 		}
+		
 	}
 	.links {
 		transition: 0.5s;

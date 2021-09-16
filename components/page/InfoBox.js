@@ -35,11 +35,15 @@ export default function InfoBox({ showInfo, setShowInfo, post, setSearch, setSho
 				</div>
 			</div>
 			<div className={styles.name}>
-				{post.title || post.titleEnglish }
+				{post.title}
 			</div>
 			<div className={styles.director}>
 				{post.director} · {post.year}
 			</div>
+			<div className={styles.nameorg}>
+				AKA: {post.titleEnglish}
+			</div>
+			
 			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
 					{post.excerpt}
