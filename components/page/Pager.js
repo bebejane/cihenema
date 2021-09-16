@@ -16,7 +16,7 @@ export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, 
 		onExit(true);
 		setTimeout(() => router.push(`/page/${nextPage}`), 1300);
 	};
-
+	console.log(buttonStyle)
 	return (
 		<div className={styles.pager} onClick={(e) => e.stopPropagation()}>
 			<a onMouseDown={gotToNextPage} onTouchStart={gotToNextPage}>

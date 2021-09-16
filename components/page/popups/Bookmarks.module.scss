@@ -60,6 +60,7 @@
 			color: #fff;
 			filter: invert(1);
 			min-width: calc(#{$padding}* 2);
+			margin-right: calc(#{$padding});
 			img {
 				width: 18px;
 				height: 18px;
@@ -67,6 +68,7 @@
 			@include mq($from: desktop) {
 				opacity: 0.3;
 				min-width: calc(#{$padding-big} * 2);
+				margin-right: calc(#{$padding-big});
 				&:hover {
 					color: #fff;
 					opacity: 0.5;

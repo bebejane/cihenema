@@ -38,8 +38,10 @@
 			margin-bottom: 0.2em;
 		}
 		&:hover {
-			@extend .heartbeat;
 			background-color: rgb(246, 0, 0);
+		}
+		&.clicked {
+			transform: scale(0);	
 		}
 	}
 }
@@ -47,18 +49,8 @@
 	animation: heartbeat 1.2s infinite;
 	animation-delay: 0.5s;
 }
-.clicked {
-	animation: clicked 0.5s cubic-bezier(0, 0, 0.14, 0.96) forwards !important;
-	animation-delay: 0s !important;
-}
-@keyframes clicked {
-	from {
-		scale: 1;
-	}
-	to {
-		scale: 0;
-	}
-}
+
+
 @keyframes heartbeat {
 	0% {
 		transform: scale(1.1);

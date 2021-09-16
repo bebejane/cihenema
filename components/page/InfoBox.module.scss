@@ -78,12 +78,12 @@
 		font-size: $subheader-size;
 		font-style: italic;
 		font-size: $text-size;
-		color: #636363;
+		color: #aaaaaa;
 
 		margin-bottom: 0.3rem;
 		@include mq($from: desktop) {
 			font-size: $text-size-big;
-			line-height: 1.5rem;
+			line-height: 2rem;
 			margin-bottom: 0.5rem;
 		}
 	}

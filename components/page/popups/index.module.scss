@@ -27,6 +27,7 @@
 			position: relative;
 			font-family: "Noto Serif KR", serif;
 			font-size: $header-size;
+			padding-bottom: $padding;
 			@include mq($from: desktop) {
 				font-size: $header-size-big;
 				padding-bottom: $padding-big !important;
