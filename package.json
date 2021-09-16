@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run export",
     "start": "next start",
     "export": "npm run scrape && next build && next export",
     "deploy": "npm run export && netlify deploy --dir ./out --prod",
