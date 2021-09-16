@@ -1,10 +1,72 @@
 .loader {
 	position: fixed;
+	display: flex;
+	flex-direction: row;
 	z-index: 99;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background-color: red;
-	background: repeating-linear-gradient( 90deg,red,red 20px, #000 20px, #000 40px); 
+	//background-color: red;
+	//background: repeating-linear-gradient( 90deg,red,red 20px, #000 20px, #000 40px); 
+}
+
+.stripe{
+	height: 100%;
+	flex: 0 1 100%;
+	
+	&.green{
+		background-color: green;
+	}
+	&.red{
+		background-color: red;
+	}
+	&.black{
+		background-color: black;
+	}
+	overflow-y: hidden;
+}
+
+.slidein{
+	animation: slidein 1s forwards;
+	animation-delay: 0.2s;
+}
+.slideout{
+	animation: slideout 1s cubic-bezier( 0, 0, 0.14, 0.96 )   forwards;
+	animation-delay: 0.2s;
+}
+.slideinup{
+	@extend .slidein;
+	align-self: flex-end;
+}
+.slideindown{
+	@extend .slideout;
+	align-self: flex-start;
+}
+.slideoutdown{
+	@extend .slideout;
+	align-self: flex-end;
+}
+.slideoutup{
+	@extend .slideout;
+	align-self: flex-start;
+}
+
+@keyframes slideout {
+	from{
+		height: 100%;
+		
+	}
+	to{
+		height: 0%;
+		
+	}
+}
+@keyframes slidein {
+	from{
+		height: 0%;
+	}
+	to{
+		height: 100%;
+	}
 }

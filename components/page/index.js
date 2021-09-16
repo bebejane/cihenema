@@ -28,31 +28,28 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const [heartbeat, setHeartbeat] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 	const [width, height] = useWindowSize();
-	const scrollY = useScrollPosition(30);
-	const post = scrollPostIndex != undefined ? posts[scrollPostIndex[Math.floor(scrollY+(height/2))]] : undefined
-	
 	const [pwaState] = usePWA();
+	const scrollY = useScrollPosition(30);
+
+	const post = scrollPostIndex != undefined ? posts[scrollPostIndex[Math.floor(scrollY+(height/2))]] : undefined
+	const heartbeatTime = scrollY > height * images - height * 3 && !heartbeat
+
+	useEffect(() => setHeartbeat(true), [heartbeatTime]);
+	useEffect(() => setScrollPostIndex(getScrollPostIndex(posts, height)), [height]);
+	useEffect(() => setLoading(true), [page]);
+	useEffect(() => imageLoaded && setTimeout(() => setLoading(false), 0), [imageLoaded]);
+	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
+	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
+	useHotkeys("esc", () => setShowInfo(false));
+	useHotkeys("right", () => router.push(`/page/${page+1}`));
+	useHotkeys("left", () => router.push(`/page/${page-1}`));
 	useEffect(()=>{
 		if(pwaState === 'controlling'){
 			//if(confirm(`New version ${version.ver} of app available. Restart now?`))
 				window.location.reload()
 		}
 	}, [pwaState])
-	useEffect(() => setScrollPostIndex(getScrollPostIndex(posts, height)), [height]);
-	useEffect(() => setLoading(true), [page]);
-	useEffect(() => imageLoaded && setTimeout(() => setLoading(false), 500), [imageLoaded]);
-	useHotkeys("s", () => setShowSearch((showSearch) => !showSearch));
-	useHotkeys("b", () => setShowBookmarks((showBookmarks) => !showBookmarks));
-	useHotkeys("esc", () => setShowInfo(false));
-	useHotkeys("right", () => router.push(`/page/${page+1}`));
-	useHotkeys("left", () => router.push(`/page/${page-1}`));
-	useHotkeys("space", (e) => {
-		//e.preventDefault()
-		//window.scroll(0, height)
-	});
-	
 
-	if (scrollY > height * images - height * 3 && !heartbeat) setHeartbeat(true);
 	return (
 		<>
 			<Head>

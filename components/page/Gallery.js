@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Gallery.module.scss";
+import GalleryImage from "./GallaryImage";
 import { useRouter } from 'next/router'
-import classes from "classnames";
 
 export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded, }) {
 	
@@ -14,14 +14,17 @@ export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded,
 	
 	useEffect(() => setImageLoaded(firstLoaded), [firstLoaded]);
 	useEffect(() => setTimeout(()=> !firstLoaded && setFirstLoaded(true), 3000), [])
-	//console.log(post.imdb)
+	
 	return posts.map((p, pidx) => {
-		return p.images.map((img, idx) => (
-			<div id={idx === 0 ? p.imdb : ""} className={classes(styles.slide, {[styles.outside]:post.imdb !== p.imdb})} key={idx} onClick={() => setShowInfo(false)}>
-				<div className={styles.wrap}>
-					<img src={img} onLoad={() => !firstLoaded && setFirstLoaded(true)}/>
-				</div>
-			</div>
+		return p.images.map((src, idx) => (
+			<GalleryImage 
+				imdbId={p.imdb}
+				src={src} 
+				index={pidx} 
+				imageIndex={idx} 
+				onLoad={()=>pidx === 0 && idx === 0 && setFirstLoaded(true)}
+				onClick={() => setShowInfo(false)}
+			/>
 		));
 	});
 }

@@ -1,0 +1,56 @@
+.slide {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	.wrap {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-top: 4px solid #fff;
+			&:first-child {
+				border-top: 0px;
+			}
+		}
+	}
+	&.entry{
+    & div > img{
+      animation: entry 1s linear;
+      animation-fill-mode: forwards;
+    }
+	}
+  &.exit{
+    & div > img{
+      animation: exit 1s linear;
+      animation-fill-mode: forwards;
+    }
+	}
+}
+
+@keyframes entry {
+  0%{
+    filter: grayscale(1);
+		filter: sepia(1);
+  }
+  100%{
+    filter: grayscale(0);
+		filter: sepia(0);
+  }
+}
+@keyframes exit {
+  0%{
+    filter: grayscale(0);
+		filter: sepia(0);
+  }
+  100%{
+    filter: grayscale(1);
+		filter: sepia(1);
+  }
+}
