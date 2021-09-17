@@ -8,7 +8,7 @@
     "start": "next start",
     "export": "npm run scrape && next build && next export",
     "deploy": "npm run export && netlify deploy --dir ./out --prod",
-    "scrape": "node ./db/scraper"
+    "scrape": "node ./lib/db/scraper"
   },
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^2.0.3",
@@ -31,6 +31,7 @@
     "swr": "^1.0.0"
   },
   "devDependencies": {
+    "axios": "^0.21.4",
     "wpapi": "^1.2.2"
   }
 }
