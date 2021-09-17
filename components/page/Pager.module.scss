@@ -38,7 +38,7 @@
 			margin-bottom: 0.2em;
 		}
 		&:hover {
-			background-color: rgb(246, 0, 0);
+			transform:scale(1.07);
 		}
 		&.clicked {
 			transform: scale(0);	
