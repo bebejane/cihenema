@@ -16,7 +16,7 @@ export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded 
 		});
 
 	useEffect(() => setImageLoaded(firstLoaded), [firstLoaded]);
-	useEffect(() => setTimeout(() => !firstLoaded && setFirstLoaded(true), 3000), []);
+	useEffect(() => setTimeout(() => !firstLoaded && setFirstLoaded(true), 10000), []);
 
 	return posts.map((p, pidx) => {
 		return p.images.map((src, idx) => (

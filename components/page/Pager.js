@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import classes from "classnames";
 import { useState, useEffect } from "react";
 
-export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, onExit }) {
+export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, setDeloading }) {
 	const router = useRouter();
 	const [clicked, setClicked] = useState(false);
 	const buttonStyle = classes({ [styles.clicked]: clicked });
@@ -13,7 +13,7 @@ export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, 
 	useEffect(() => router.prefetch(`/page/${nextPage}`).then(), []);
 	const gotToNextPage = () => {
 		setClicked(true);
-		onExit(true);
+		setDeloading(true);
 		setTimeout(() => router.push(`/page/${nextPage}`), 1300);
 	};
 	console.log(buttonStyle)

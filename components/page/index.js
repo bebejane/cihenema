@@ -1,15 +1,17 @@
 import styles from "./index.module.scss";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import classes from "classnames";
 import Loader from "@/components/common/Loader";
 import InfoBox from "./InfoBox";
 import Gallery from "./Gallery";
 import Pager from "./Pager";
-import Bookmarks from "./popups/Bookmarks";
 import Search from "./popups/Search";
-import usePWA from "@/lib/hooks/usePWA";
+import Bookmarks from "./popups/Bookmarks";
+
+import Head from "next/head";
+import classes from "classnames";
+
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
+import usePWA from "@/lib/hooks/usePWA";
 import useScrollPosition from "@react-hook/window-scroll";
 import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -53,11 +55,6 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 		}
 	}, [pwaState]);
 
-	const handleExit = () => {
-		console.log("exit");
-		setDeloading(true);
-	};
-
 	return (
 		<>
 			<Head>
@@ -70,7 +67,7 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 			>
 				<Gallery {...{ posts, setShowInfo, setImageLoaded, post }} />
 				<InfoBox {...{ setShowInfo, showInfo, post, setShowSearch, setShowBookmarks }} />
-				<Pager {...{ nextPage, loading, page, heartbeat, onExit: handleExit }} />
+				<Pager {...{ nextPage, loading, page, heartbeat, setDeloading }} />
 				<Search {...{ showSearch, setShowSearch }} />
 				<Bookmarks {...{ showBookmarks, setShowBookmarks }} />
 				<Loader loading={loading} deloading={deloading} />
