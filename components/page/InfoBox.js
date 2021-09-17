@@ -1,8 +1,9 @@
 import styles from "./InfoBox.module.scss";
 import Link from "next/link";
 import classes from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
+import { BookmarksContext } from "@/lib/context/bookmarks";
 
 export default function InfoBox({
 	showInfo,
@@ -15,13 +16,9 @@ export default function InfoBox({
 
 	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showInfo });
 	const [bookmarked, setBookmarked] = useState(false);
-
-	const toggleBook = (post) => {
-		toggleBookmark(post);
-		setBookmarked(isBookmarked(post.imdb));
-	};
-
-	useEffect(() => setBookmarked(isBookmarked(post.imdb)), [post]);
+	const {bookmarks, dispatch} = useContext(BookmarksContext);
+	
+	useEffect(() => setBookmarked(!!(bookmarks.filter(b => b.imdb === post.imdb).length), [post, bookmarks]))
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>
@@ -34,7 +31,7 @@ export default function InfoBox({
 				</div>
 				<div
 					className={classes(styles.bookmark, { [styles.toggled]: bookmarked })}
-					onClick={() => toggleBook(post)}
+					onClick={() => dispatch({post, type:'TOGGLE'})}
 				>
 					<img title={`Toggle bookmark`} src={"/images/plus.svg"} />
 				</div>

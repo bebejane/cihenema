@@ -24,7 +24,7 @@ const introAnimation = {
 	y: [0, 0, 0, 0, 0, 0, 0, 0, -2000],
 };
 
-const introAnimationDuration = 6;
+const duration = 6;
 
 export default function Home({ totalPages }) {
 	const [pwa] = usePWA();
@@ -38,7 +38,7 @@ export default function Home({ totalPages }) {
 		//setRenderKey(Math.random())
 	};
 	useEffect(() => {
-		setTimeout(() => router.push(`/page/${randomPage}`), introAnimationDuration * 1000 + 300);
+		setTimeout(() => router.push(`/page/${randomPage}`), duration * 1000 + 300);
 	}, []);
 	
 	return (
@@ -54,7 +54,7 @@ export default function Home({ totalPages }) {
 						initial="hidden"
 						animate={introAnimation}
 						style={{scale:0}}
-						transition={{ delay:0.5, duration: introAnimationDuration, ease: "easeOut", staggerChildren: 0.3 }}
+						transition={{ delay:0.5, duration, ease: "easeOut", staggerChildren: 0.3 }}
 						onClick={onClick}
 					>
 						{[...title].map((c, idx) => (

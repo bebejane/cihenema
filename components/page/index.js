@@ -15,6 +15,7 @@ import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
 import version from "/VERSION";
 
+
 export default function Page({ posts, images, page, totalPages, newest }) {
 	const router = useRouter();
 	const [nextPage] = useState(Math.floor(Math.random() * totalPages));

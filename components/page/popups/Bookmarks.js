@@ -1,22 +1,13 @@
 import styles from "./Bookmarks.module.scss";
 import Link from "next/link";
 import PopUp from "./";
-import { useEffect, useState } from "react";
-import { getBookmarks, toggleBookmark } from "@/lib/bookmarks";
+import { useEffect, useState, useContext } from "react";
+import { BookmarksContext } from "@/lib/context/bookmarks";
 
 export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
-	const [bookmarks, setBookmarks] = useState([]);
-
-	useEffect(() => setBookmarks(getBookmarks()), [showBookmarks]);
-
-	const deleteBookmark = (post) => {
-		const marks = bookmarks.filter((b) => b.imdb !== post.imdb);
-		toggleBookmark(post);
-		setBookmarks(marks);
-	};
-
+	const {bookmarks, dispatch} = useContext(BookmarksContext);
 	if (!showBookmarks) return null;
-	console.log(showBookmarks, bookmarks);
+	
 	return (
 		<PopUp header={"Bookmarks"} show={showBookmarks} setShow={setShowBookmarks}>
 			<ul className={styles.list}>
@@ -32,7 +23,7 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 								</div>
 							</a>
 						</Link>
-						<div className={styles.delete} onClick={() => deleteBookmark(m)}>
+						<div className={styles.delete} onClick={() => dispatch({id:m.imdb, type:'DELETE'})}>
 							<img src={"/images/minus.svg"} />
 						</div>
 					</li>
