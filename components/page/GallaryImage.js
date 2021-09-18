@@ -14,10 +14,17 @@ export default function GalleryImage({
 	onLoad,
 	onClick,
 }) {
+
+	const [effect, setEffect] = useState({})
 	const { ref, inView, entry } = useInView({ threshold});
-	const r = entry ? entry.intersectionRatio : 0
-	const scale = 1.0 + (r*0.2)
-	const effect = {transform:`scale(${scale})`}
+	const {intersectionRatio : ratio} = entry || {}
+
+	useEffect(()=>{
+		const scale = 1.0 + (ratio*0.2)
+		const effect = {transform:`scale(${scale})`}
+		setEffect(effect);
+	}, [ratio])
+	
 	
 	return (
 		<div

@@ -2,45 +2,43 @@ import styles from "./Loader.module.scss";
 import classes from "classnames";
 import { useState, useEffect } from "react";
 import { useWindowSize } from "@react-hook/window-size";
+import Color from "color";
 
 export default function Loader({ loading, deloading }) {
 	const [loader, setLoader] = useState("loading");
+	const [animated, setAnimated] = useState(0);
 	const [width, height] = useWindowSize();
-	const noStripes = width > 768 ? 51 : 23;
+	const numStripes = width > 768 ? 51 : 23;
 	const curve = 0.02;
-	const duration = 1000;
-	const totalDuration = (duration / 1000) * (noStripes * curve);
+	const duration = width > 768 ? 1000 : 2000;	
 
-	const stripes = new Array(noStripes).fill({}).map((s, i) => {
+	const stripes = new Array(numStripes).fill({}).map((s, i) => {
 		const odd = i % 2 === 0;
-		const color = odd ? "red" : "black";
+		const color = odd ? "rgb(255,0,0)" : "rgb(0,0,0)";
 		const deload = deloading ? (odd ? "slideinup" : "slideindown") : undefined;
 		const animation = loader === "animate" ? (odd ? "slideoutup" : "slideoutdown") : undefined;
+		
 		return {
 			color,
 			animation: animation || deload,
-			duration: (duration / 1000) * (deloading ? noStripes - i + 1 : i + 1) * curve + "s",
+			duration: (duration / 1000) * (deloading ? numStripes - i + 1 : i + 1) * curve + "s",
 		};
 	});
 
 	useEffect(() => deloading && setLoader("deloading"), [deloading]);
-	useEffect(() => {
-		if (!loading && loader == "loading") {
-			setLoader("animate");
-			setTimeout(() => setLoader("ready"), totalDuration * 1000);
-		}
-	}, [loading]);
+	useEffect(() => (!loading && loader == "loading") && setLoader("animate"), [loading]);
+	useEffect(() => animated === numStripes && setLoader("done"), [animated]);
 
-	if (loader === "ready") 
-		return null;
+	if (loader === "done") return null;
 
 	return (
 		<div className={styles.loader} suppressHydrationWarning={true}>
 			{stripes.map((s, idx) => (
 				<div
           key={idx}
-					className={classes(styles.stripe, styles[s.color], styles[s.animation])}
-					style={{ animationDuration: s.duration }}
+					className={classes(styles.stripe, styles[s.animation])}
+					onAnimationEnd={(idx)=>setAnimated(animated+1)}
+					style={{ animationDuration: s.duration, backgroundColor:s.color }}
 				></div>
 			))}
 		</div>
