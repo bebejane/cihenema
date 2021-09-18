@@ -37,7 +37,6 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const scrollY = useScrollPosition(30);
 
 	const post = posts[scrollMap[Math.floor(scrollY + height / 2)]]
-	const heartbeatTime = scrollY > height * images - height * 3 && !heartbeat;
 
 	useEffect(() => setScrollMap(getScrollMap(posts, height)), [height]);
 	useEffect(() => setLoading(true), [page]);
