@@ -34,11 +34,12 @@ export default function Home({ totalPages }) {
 	const title = "Cihenema";
 
 	const onClick = (e) => {
-		//router.push(`/page/${randomPage}`)
+		router.push(`/page/${randomPage}`)
 		//setRenderKey(Math.random())
 	};
 	useEffect(() => {
 		setTimeout(() => router.push(`/page/${randomPage}`), duration * 1000 + 300);
+
 	}, []);
 	
 	return (

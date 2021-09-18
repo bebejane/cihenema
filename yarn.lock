@@ -2380,7 +2380,15 @@
   "resolved" "https://registry.npmjs.org/formidable/-/formidable-1.2.2.tgz"
   "version" "1.2.2"
 
-"framer-motion@^4.1.17":
+"framer-motion-hooks@^1.0.9":
+  "integrity" "sha512-i+UkOgg86HMmCl4rPGPOeh46yF9e0bm+NFmIZZ5SX5pEYfBBW9z8v/CF4oTxLb8IXayeK1QN8YB38XWw6VHAbQ=="
+  "resolved" "https://registry.npmjs.org/framer-motion-hooks/-/framer-motion-hooks-1.0.9.tgz"
+  "version" "1.0.9"
+  dependencies:
+    "framer-motion" "^4.1.2"
+    "react-intersection-observer" "^8.31.0"
+
+"framer-motion@^4.1.17", "framer-motion@^4.1.2":
   "integrity" "sha512-thx1wvKzblzbs0XaK2X0G1JuwIdARcoNOW7VVwjO8BUltzXPyONGAElLu6CiCScsOQRI7FIk/45YTFtJw5Yozw=="
   "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-4.1.17.tgz"
   "version" "4.1.17"
@@ -3612,7 +3620,7 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dom@^17.0.2", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8.1", "react-dom@17.0.2":
+"react-dom@^17.0.1", "react-dom@^17.0.2", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8.1", "react-dom@17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -3628,7 +3636,7 @@
   dependencies:
     "hotkeys-js" "3.8.7"
 
-"react-intersection-observer@^8.32.1":
+"react-intersection-observer@^8.31.0", "react-intersection-observer@^8.32.1":
   "integrity" "sha512-FOmMkMw7MeJ8FkuADpU8TRcvGuTvPB+DRkaikS1QXcWArYLCWC3mjRorq2XeRGBuqmaueOBd27PUazTu9AgInw=="
   "resolved" "https://registry.npmjs.org/react-intersection-observer/-/react-intersection-observer-8.32.1.tgz"
   "version" "8.32.1"
@@ -3652,7 +3660,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   "version" "0.8.3"
 
-"react@*", "react@^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0", "react@^16.11.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.1", "react@17.0.2":
+"react@*", "react@^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0", "react@^16.11.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.1", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

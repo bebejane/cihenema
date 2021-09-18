@@ -27,15 +27,15 @@ export default function Loader({ loading, deloading }) {
 	useEffect(() => {
 		if (!loading && loader == "loading") {
 			setLoader("animate");
-			console.log("animate", totalDuration);
 			setTimeout(() => setLoader("ready"), totalDuration * 1000);
 		}
 	}, [loading]);
 
-	if (loader === "ready") return null;
+	if (loader === "ready") 
+		return null;
 
 	return (
-		<div className={styles.loader}>
+		<div className={styles.loader} suppressHydrationWarning={true}>
 			{stripes.map((s, idx) => (
 				<div
           key={idx}

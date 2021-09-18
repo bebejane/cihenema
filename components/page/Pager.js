@@ -16,15 +16,15 @@ export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, 
 		setDeloading(true);
 		setTimeout(() => router.push(`/page/${nextPage}`), 1300);
 	};
-	console.log(buttonStyle)
+	
 	return (
 		<div className={styles.pager} onClick={(e) => e.stopPropagation()}>
 			<a onMouseDown={gotToNextPage} onTouchStart={gotToNextPage}>
-				{!loading && (
+				{!loading && 
 					<div className={buttonStyle}>
 						<span>{page}</span>
 					</div>
-				)}
+				}
 				{loading && <div className={loadingStyle}></div>}
 			</a>
 			{/*<Link href={`/page/${nextPage}`} ></Link>*/}

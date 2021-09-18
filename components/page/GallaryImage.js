@@ -3,6 +3,8 @@ import styles from "./GalleryImage.module.scss";
 import classes from "classnames";
 import { useInView } from "react-intersection-observer";
 
+const threshold = new Array(100).fill(0).map((x,t)=> t/100)
+
 export default function GalleryImage({
 	src,
 	imdbId,
@@ -12,18 +14,21 @@ export default function GalleryImage({
 	onLoad,
 	onClick,
 }) {
-	const { ref, inView } = useInView({ threshold: 0.5 });
-
+	const { ref, inView, entry } = useInView({ threshold});
+	const p = entry ? entry.intersectionRatio : 0
+	const scale = 1.0 + (p*0.2)
+	const effect = {transform:`scale(${scale})`}
+	
 	return (
 		<div
 			id={imdbId}
 			key={index + "-" + imageIndex}
 			ref={ref}
-			className={classes(styles.slide, { [styles.entry]: inView }, { [styles.exit]: !inView })}
+			className={classes(styles.slide)}
 			onClick={onClick}
 		>
-			<div className={styles.wrap}>
-				<img src={src} onLoad={onLoad} />
+			<div className={styles.wrap} >
+				<img src={src} onLoad={onLoad} style={effect}/>
 			</div>
 		</div>
 	);

@@ -41,8 +41,9 @@
 			transform:scale(1.07);
 		}
 		&.clicked {
-			transform: scale(0);	
+			animation: clicked 0.4s forwards;
 		}
+		
 	}
 }
 .heartbeat {
@@ -51,6 +52,14 @@
 }
 
 
+@keyframes clicked {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
 @keyframes heartbeat {
 	0% {
 		transform: scale(1.1);

@@ -26,6 +26,7 @@
 }
 
 
+
 .ca {
 	filter: scale(0.1);
 }
@@ -60,4 +61,35 @@
 .ca7 {
 	transition: 2s !important;
 	font-size: 10vw !important;
+}
+
+.text-shadow-pop-br {
+	-webkit-animation: text-shadow-pop-br 0.6s both;
+	        animation: text-shadow-pop-br 0.6s both;
+					animation-delay: 2.0s;
+}
+
+ @-webkit-keyframes text-shadow-pop-br {
+  0% {
+    text-shadow: 0 0 #ffffff, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+  }
+  100% {
+    text-shadow: 1px 1px #FFFFFF, 2px 2px #FFFFFF, 3px 3px #FFFFFF, 4px 4px #FFFFFF, 5px 5px #FFFFFF, 6px 6px #FFFFFF, 7px 7px #FFFFFF, 8px 8px #FFFFFF;
+    -webkit-transform: translateX(-8px) translateY(-8px);
+            transform: translateX(-8px) translateY(-8px);
+  }
+}
+@keyframes text-shadow-pop-br {
+  0% {
+    text-shadow: 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF, 0 0 #FFFFFF;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+  }
+  100% {
+    text-shadow: 1px 1px #FFFFFF, 2px 2px #FFFFFF, 3px 3px #FFFFFF, 4px 4px #FFFFFF, 5px 5px #FFFFFF, 6px 6px #FFFFFF, 7px 7px #FFFFFF, 8px 8px #FFFFFF;
+    -webkit-transform: translateX(-8px) translateY(-8px);
+            transform: translateX(-8px) translateY(-8px);
+  }
 }
