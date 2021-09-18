@@ -15,8 +15,8 @@ export default function GalleryImage({
 	onClick,
 }) {
 	const { ref, inView, entry } = useInView({ threshold});
-	const p = entry ? entry.intersectionRatio : 0
-	const scale = 1.0 + (p*0.2)
+	const r = entry ? entry.intersectionRatio : 0
+	const scale = 1.0 + (r*0.2)
 	const effect = {transform:`scale(${scale})`}
 	
 	return (

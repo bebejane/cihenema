@@ -48,13 +48,14 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	useHotkeys("esc", () => setShowInfo(false));
 	useHotkeys("right", () => router.push(`/page/${page + 1}`));
 	useHotkeys("left", () => router.push(`/page/${page - 1}`));
+	
 	useEffect(() => {
 		if (pwaState === "controlling") {
-			//if(confirm(`New version ${version.ver} of app available. Restart now?`))
-			window.location.reload();
+			if(confirm(`New version ${version.ver} of app available. Restart now?`))
+				window.location.reload();
 		}
 	}, [pwaState]);
-
+	
 	return (
 		<>
 			<Head>
