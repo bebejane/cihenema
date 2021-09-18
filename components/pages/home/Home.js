@@ -1,11 +1,12 @@
+import s from "./Home.module.scss";
+import cn from "classnames";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Loader from "@/components/common/Loader";
+import {Loader} from "@/components/common";
 import Link from "next/link";
 import Head from "next/head";
 import usePWA from "@/lib/hooks/usePWA";
-import styles from "./index.module.scss";
-import classes from "classnames";
+
 import { motion, useMotionValue } from "framer-motion";
 
 const introAnimation = {
@@ -49,21 +50,21 @@ export default function Home({ totalPages }) {
 				<title>{title}</title>
 			</Head>
 			<Link href={`/page/${randomPage}`}>
-				<main className={classes(styles.container)} onClick={onClick}>
+				<main className={cn(s.container)} onClick={onClick}>
 					<motion.div
 						key={renderKey}
 						initial="hidden"
 						animate={introAnimation}
 						style={{scale:0}}
-						transition={{ delay:0.5, duration, ease: "easeOut", staggerChildren: 0.3 }}
+						transition={{ delay:0.5, duration, ease: "easeOut"}}
 						onClick={onClick}
 					>
-						{[...title].map((c, idx) => (
+						{[...title].map((char, idx) => (
 							<span
 								key={idx}
-								className={classes({ [styles.ca]: true }, { [styles[`ca${idx}`]]: true })}
+								className={cn({[s.ca]: true }, {[s[`ca${idx}`]]: true })}
 							>
-								{c}
+								{char}
 							</span>
 						))}
 					</motion.div>

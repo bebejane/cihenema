@@ -1,6 +1,7 @@
-import styles from "./InfoBox.module.scss";
+import s from "./InfoBox.module.scss";
+import cn from "classnames";
 import Link from "next/link";
-import classes from "classnames";
+
 import { useEffect, useState, useContext } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { BookmarksContext } from "@/lib/context/bookmarks";
@@ -14,7 +15,7 @@ export default function InfoBox({
 }) {
 	if (!post) return null;
 
-	const containerStyle = classes(styles["info-box"], { [styles.toggled]: showInfo });
+	const containerStyle = cn(s["info-box"], { [s.toggled]: showInfo });
 	const [bookmarked, setBookmarked] = useState(false);
 	const {bookmarks, dispatch} = useContext(BookmarksContext);
 	
@@ -22,33 +23,33 @@ export default function InfoBox({
 
 	return (
 		<div className={containerStyle} onClick={(e) => e.stopPropagation()}>
-			<div className={styles.icons}>
-				<div className={styles.find} onClick={() => setShowSearch(true)}>
+			<div className={s.icons}>
+				<div className={s.find} onClick={() => setShowSearch(true)}>
 					<img title={`Press 'F'`} src={"/images/find.svg"} />
 				</div>
-				<div className={styles.find} onClick={() => setShowBookmarks(true)}>
+				<div className={s.find} onClick={() => setShowBookmarks(true)}>
 					<img title={`Press 'B'`} src={"/images/bookmark.svg"} />
 				</div>
 				<div
-					className={classes(styles.bookmark, { [styles.toggled]: bookmarked })}
+					className={cn(s.bookmark, { [s.toggled]: bookmarked })}
 					onClick={() => dispatch({post, type:'TOGGLE'})}
 				>
 					<img title={`Toggle bookmark`} src={"/images/plus.svg"} />
 				</div>
-				<div className={styles.close} onClick={() => setShowInfo(false)}>
+				<div className={s.close} onClick={() => setShowInfo(false)}>
 					<img title={`Press 'ESC'`} src={"/images/close.svg"} />
 				</div>
 			</div>
-			<div className={styles.name}>{post.title}</div>
-			{post.titleEnglish && <div className={styles.nameorg}>{post.titleEnglish}</div>}
-			<div className={styles.director}>
+			<div className={s.name}>{post.title}</div>
+			{post.titleEnglish && <div className={s.nameorg}>{post.titleEnglish}</div>}
+			<div className={s.director}>
 				{post.director} · {post.year}
 			</div>
-			<div className={styles.summary} onClick={(e) => e.stopPropagation()}>
+			<div className={s.summary} onClick={(e) => e.stopPropagation()}>
 				<div>
 					{post.excerpt}
 				</div>
-				<div className={styles.links} onClick={(e) => e.stopPropagation()}>
+				<div className={s.links} onClick={(e) => e.stopPropagation()}>
 					{post.imdb && (
 						<Link href={"https://imdb.com/title/" + post.imdb}>
 							<a target="_new">Imdb</a>

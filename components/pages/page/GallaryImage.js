@@ -1,6 +1,6 @@
+import s from "./GalleryImage.module.scss";
+import cn from "classnames";
 import { useState, useEffect } from "react";
-import styles from "./GalleryImage.module.scss";
-import classes from "classnames";
 import { useInView } from "react-intersection-observer";
 
 const threshold = new Array(100).fill(0).map((x,t)=> t/100)
@@ -20,7 +20,7 @@ export default function GalleryImage({
 	const {intersectionRatio : ratio} = entry || {}
 
 	useEffect(()=>{
-		const scale = 1.0 + (ratio*0.2)
+		const scale = 1.0 + (ratio*0.1)
 		const effect = {transform:`scale(${scale})`}
 		setEffect(effect);
 	}, [ratio])
@@ -31,10 +31,10 @@ export default function GalleryImage({
 			id={imdbId}
 			key={index + "-" + imageIndex}
 			ref={ref}
-			className={classes(styles.slide)}
+			className={cn(s.slide)}
 			onClick={onClick}
 		>
-			<div className={styles.wrap} >
+			<div className={s.wrap} >
 				<img src={src} onLoad={onLoad} style={effect}/>
 			</div>
 		</div>

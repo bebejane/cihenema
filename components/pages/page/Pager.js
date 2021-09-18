@@ -1,14 +1,14 @@
-import styles from "./Pager.module.scss";
+import s from "./Pager.module.scss";
+import cn from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import classes from "classnames";
 import { useState, useEffect } from "react";
 
-export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, setDeloading }) {
+export default function Pager({ handleLoad, nextPage, loading, page, setDeloading }) {
 	const router = useRouter();
 	const [clicked, setClicked] = useState(false);
-	const buttonStyle = classes({ [styles.clicked]: clicked });
-	const loadingStyle = classes(styles["lds-hourglass"], styles.heartbeat);
+	const buttonStyle = cn({ [s.clicked]: clicked });
+	const loadingStyle = cn(s["lds-hourglass"], s.heartbeat);
 
 	useEffect(() => router.prefetch(`/page/${nextPage}`).then(), []);
 	const gotToNextPage = () => {
@@ -18,7 +18,7 @@ export default function Pager({ handleLoad, nextPage, loading, page, heartbeat, 
 	};
 	
 	return (
-		<div className={styles.pager} onClick={(e) => e.stopPropagation()}>
+		<div className={s.pager} onClick={(e) => e.stopPropagation()}>
 			<a onMouseDown={gotToNextPage} onTouchStart={gotToNextPage}>
 				{!loading && 
 					<div className={buttonStyle}>

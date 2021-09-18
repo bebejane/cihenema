@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./Gallery.module.scss";
+import s from "./Gallery.module.scss";
 import GalleryImage from "./GallaryImage";
 import { useRouter } from "next/router";
 

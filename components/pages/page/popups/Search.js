@@ -1,6 +1,6 @@
-import styles from "./Search.module.scss";
+import s from "./Search.module.scss";
 import Link from "next/link";
-import PopUp from "./";
+import PopUp from "./PopUp";
 import useSearch from "@/lib/hooks/useSearch";
 import { useRef } from "react";
 
@@ -12,7 +12,7 @@ export default function Search({ showSearch, setShowSearch }) {
 
 	return (
 		<PopUp header={"Search"} show={showSearch} setShow={setShowSearch}>
-			<form className={styles.searchForm} onSubmit={(e) => e.preventDefault()}>
+			<form className={s.searchForm} onSubmit={(e) => e.preventDefault()}>
 				<input
 					type="text"
 					value={search.q}
@@ -21,14 +21,14 @@ export default function Search({ showSearch, setShowSearch }) {
 					placeholder={"Type it..."}
 				/>
 			</form>
-			<ul className={styles.list}>
+			<ul className={s.list}>
 				{search.result.map((m) => (
-					<li className={styles.item}>
+					<li className={s.item}>
 						<Link href={`/page/${m.item.p}#${m.item.i}`} prefetch={true}>
 							<a>
-								<div className={styles.title}>
+								<div className={s.title}>
 									{m.item.ten || m.item.t}
-									<div className={styles.director}>
+									<div className={s.director}>
 										{m.item.d} ({m.item.y})
 									</div>
 								</div>
