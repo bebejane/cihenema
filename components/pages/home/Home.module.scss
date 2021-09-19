@@ -17,7 +17,7 @@
 	z-index: 100000;
 	div {			
 		font-size: $header-size;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			font-size: $header-size-big;
 		}
 		color: red;

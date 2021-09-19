@@ -7,9 +7,9 @@
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
-	z-index: 104;
+	z-index: 300;
 	padding: calc(#{$padding});
-	@include mq($from: desktop) {
+	@include mq($from: tablet, $and: '(orientation: landscape)') {
 		padding: calc(#{$padding}* 4);
 	}
 	.wrap {
@@ -20,7 +20,7 @@
 		border: 10px solid rgb(255, 0, 0);
 		background-color: rgba(0, 0, 0, 0.95);
 		height: 100%;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			padding: calc(#{$padding}* 2);
 		}
 		.header {
@@ -28,7 +28,7 @@
 			font-family: "Noto Serif KR", serif;
 			font-size: $header-size;
 			padding-bottom: $padding;
-			@include mq($from: desktop) {
+			@include mq($from: tablet, $and: '(orientation: landscape)') {
 				font-size: $header-size-big;
 				padding-bottom: $padding-big !important;
 			}
@@ -44,7 +44,7 @@
 					width: 18px;
 					height: 18px;
 				}
-				@include mq($from: desktop) {
+				@include mq($from: tablet, $and: '(orientation: landscape)') {
 					opacity: 0.6;
 					&:hover {
 						color: #fff;

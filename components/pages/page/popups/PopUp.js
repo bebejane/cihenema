@@ -1,13 +1,14 @@
 import s from "./PopUp.module.scss";
 import { useUI, UIAction, UIPopup } from "@/lib/context/ui";
+import { useEffect } from "react";
 
 export default function PopUp({ header, show, type, children }) {
 
 	if (!show) return null;
-	
 	const [{}, setUI] = useUI();
+
 	return (
-		<div className={s.popup} onClick={(e) => e.stopPropagation()}>
+		<aside className={s.popup}>
 			<div className={s.wrap}>
 				<div className={s.header}>
 					{header}
@@ -17,7 +18,7 @@ export default function PopUp({ header, show, type, children }) {
 				</div>
 				<div className={s.content}>{children}</div>
 			</div>
-		</div>
+		</aside>
 	);
 }
 

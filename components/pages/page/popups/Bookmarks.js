@@ -1,30 +1,33 @@
 import s from "./Bookmarks.module.scss";
 import Link from "next/link";
 import PopUp from "./PopUp";
-import { useEffect, useState, useContext } from "react";
 import { useBookmarks } from "@/lib/context/bookmarks";
-import { useUI, UIAction, UIPopup } from "@/lib/context/ui";
+import { useUI, UIPopup, UIAction } from "@/lib/context/ui";
 
 export default function Bookmarks({ }) {
 	const [bookmarks, setBookmarks] = useBookmarks()
 	const [{popup}, setUI] = useUI();
 
 	return (
-		<PopUp header={"Bookmarks"} show={popup === UIPopup.BOOKMARKS} type={UIPopup.BOOKMARKS}>
+		<PopUp 
+			header={"Bookmarks"} 
+			show={popup === UIPopup.BOOKMARKS} 
+			type={UIPopup.BOOKMARKS
+		}>
 			<ul className={s.list}>
-				{bookmarks.length ? bookmarks.map((m, idx) => (
-					<li key={idx} className={s.item}>
-						<Link href={`/page/${m.page}#${m.imdb}`} prefetch={true}>
+				{bookmarks.length ? bookmarks.map(({page, imdb, titleEnglish, title, director, year}, idx) => (
+					<li key={idx} className={s.item} onClick={(e) => setUI({type:UIAction.HIDE_POPUP, popup:UIPopup.BOOKMARKS})}>
+						<Link href={`/page/${page}#${imdb}`} >
 							<a>
 								<div className={s.title}>
-									{m.titleEnglish || m.title}
+									{titleEnglish || title}
 									<div className={s.director}>
-										{m.director} ({m.year})
+										{director} ({year})
 									</div>
 								</div>
 							</a>
 						</Link>
-						<div className={s.delete} onClick={() => setBookmarks({id:m.imdb, type:'DELETE'})}>
+						<div className={s.delete} onClick={() => setBookmarks({type:'DELETE', id:imdb})}>
 							<img src={"/images/minus.svg"} />
 						</div>
 					</li>

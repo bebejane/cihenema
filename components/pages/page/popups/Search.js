@@ -12,7 +12,11 @@ export default function Search({ }) {
 	const [search, setSearch] = useSearch();
 	
 	return (
-		<PopUp header={"Search"} show={popup === UIPopup.SEARCH} type={UIPopup.SEARCH}>
+		<PopUp 
+			header={"Search"} 
+			show={popup === UIPopup.SEARCH} 
+			type={UIPopup.SEARCH
+		}>
 			<form className={s.searchForm} onSubmit={(e) => e.preventDefault()}>
 				<input
 					type="text"
@@ -23,8 +27,8 @@ export default function Search({ }) {
 				/>
 			</form>
 			<ul className={s.list}>
-				{search.result.map((m) => (
-					<li className={s.item}>
+				{search.result.map((m, idx) => (
+					<li key={idx} className={s.item}>
 						<Link href={`/page/${m.item.p}#${m.item.i}`} prefetch={true}>
 							<a>
 								<div className={s.title}>

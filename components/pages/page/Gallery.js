@@ -20,17 +20,21 @@ export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded 
 	useEffect(() => setImageLoaded(firstLoaded), [firstLoaded]);
 	useEffect(() => setTimeout(() => !firstLoaded && setFirstLoaded(true), 10000), []);
 	
-	return posts.map((p, pidx) => {
-		return p.images.map((src, idx) => (
-			<GalleryImage
-				key={idx}
-				imdbId={p.imdb}
-				src={src}
-				index={pidx}
-				imageIndex={idx}
-				onLoad={() => pidx === 0 && idx === 0 && setFirstLoaded(true)}
-				onClick={() => setUI({type:UIAction.TOGGLE_INFO})}
-			/>
-		));
-	});
+	return posts.map((p, pidx) => { 
+		return (
+			<article key={pidx} className={s.gallery}>
+				{p.images.map((src, idx) => 
+					<GalleryImage
+						key={idx}
+						imdbId={p.imdb}
+						src={src}
+						index={pidx}
+						imageIndex={idx}
+						onLoad={() => pidx === 0 && idx === 0 && setFirstLoaded(true)}
+						onClick={() => setUI({type:UIAction.TOGGLE_INFO})}
+					/>
+				)}
+			</article>
+		)
+	})
 }

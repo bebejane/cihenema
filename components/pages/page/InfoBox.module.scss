@@ -1,4 +1,4 @@
-.info-box {
+.infobox, .infoheader {
 	position: fixed;
 	display: flex;
 	flex-direction: column;
@@ -6,21 +6,18 @@
 	left: 0;
 	bottom: 0;
 	color: #fff;
-	z-index: 1;
+	z-index: 100;
 	color: #fff;
+	background-color: #000;
 	width: 100%;
 	padding: $padding;
-	@include mq($from: desktop) {
-		padding: $padding-big;
+	transform: translateY(100%);
+	transition: .3s cubic-bezier(0.17, 0.04, 0.03, 0.94);
+	&.toggled{
+		transform: translateY(0%);
 	}
-	&.toggled {
-		background-color: #000;
-		.summary {
-			display: flex;
-		}
-		.icons {
-			display: flex;
-		}
+	@include mq($from: tablet, $and: '(orientation: landscape)') {
+		padding: $padding-big;
 	}
 	.name {
 		font-weight: 700;
@@ -30,7 +27,7 @@
 		width: 100%;
 		font-size: $header-size;
 		line-height: 1.3;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			font-size: $header-size-big;
 		}
 	}
@@ -44,7 +41,7 @@
 		width: 100%;
 		line-height: 1.3;
 		font-size: $subheader-size;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			font-size: $subheader-size-big;
 		}
 	}
@@ -53,7 +50,6 @@
 		font-family: "Noto Serif KR", serif;
 	}
 	.summary {
-		display: none;
 		flex-direction: column;
 		max-width: 900px;
 		margin-top: 10px;
@@ -64,7 +60,7 @@
 		font-weight: 700;
 		font-size: $text-size;
 		text-align: justify;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			font-size: $text-size-big;
 			line-height: 2.3rem;
 		}
@@ -80,7 +76,7 @@
 		color: #aaaaaa;
 
 		margin-bottom: 0.3rem;
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			font-size: $text-size-big;
 			line-height: 2rem;
 			margin-bottom: 0.5rem;
@@ -107,56 +103,15 @@
 			}
 		}
 	}
-	.icons {
-		display: none;
-		flex-direction: row;
-		justify-content: flex-end;
-		width: 100%;
-		font-size: 40px;
-		opacity: 0.7;
-		background-color: transparent;
-		color: #fff;
-		z-index: 1;
-		@include mq($from: desktop) {
-			&:hover {
-				color: #fff;
-			}
-		}
-		& div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 40px;
-			padding: 3px;
-			opacity: 0.9;
-			margin-left: 5px;
-			@include mq($from: desktop) {
-				opacity: 0.7;
-				margin-left: 10px;
-				&:hover {
-					color: #fff;
-					opacity: 1;
-				}
-			}
-			img {
-				filter: invert(1);
-				margin: 0;
-				width: 18px;
-				height: 18px;
-				@include mq($from: desktop) {
-					width: 23px;
-					height: 23px;
-				}
-			}
-		}
-		.bookmark {
-			filter: rotate(90deg);
-			&.toggled {
-				opacity: 1;
-				background-color: rgb(69, 69, 69);
-			}
-		}
-		.close {
-		}
-	}
+}
+.infoheader {
+	background-color: transparent;
+	width: auto;
+	max-width: 100%;
+	margin-bottom: 0px;
+	transform: translateY(0%);
+	transition: .1s;
+	&.toggled{
+		transform: translateY(100%);
+	}	
 }

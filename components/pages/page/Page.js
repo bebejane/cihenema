@@ -1,15 +1,15 @@
 import version from "/VERSION";
 import s from "./Page.module.scss";
 import cn from "classnames";
+import Head from "next/head";
 
+import { BookmarksProvider } from "@/lib/context/bookmarks";
 import Loader from "@/components/common/Loader";
 import InfoBox from "./InfoBox";
 import Gallery from "./Gallery";
 import Pager from "./Pager";
 import Search from "./popups/Search";
 import Bookmarks from "./popups/Bookmarks";
-
-import Head from "next/head";
 
 import { useUI, UIAction, UIPopup } from "@/lib/context/ui";
 import { useEffect, useState, useRef } from "react";
@@ -18,7 +18,6 @@ import { useWindowSize } from "@react-hook/window-size";
 import { useHotkeys } from "react-hotkeys-hook";
 import usePWA from "@/lib/hooks/usePWA";
 import useScrollPosition from "@react-hook/window-scroll";
-
 
 export default function Page({ posts, images, page, totalPages, newest }) {
 
@@ -34,14 +33,19 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 	const scrollY = useScrollPosition(30);
 	const post = posts[scrollMap[Math.floor(scrollY + height / 2)]]
 
+	const goToPage = (page) => {
+		setDeloading(true)
+		setTimeout(()=> router.push(`/page/${page}`), 1500)
+	}
 	useEffect(() => setScrollMap(getScrollMap(posts, height)), [height]);
 	useEffect(() => setLoading(true), [page]);
 	useEffect(() => imageLoaded && setTimeout(() => setLoading(false), 0), [imageLoaded]);
+	
 	useHotkeys("s", () =>  setUI({type:UIAction.TOGGLE_POPUP, popup:UIPopup.SEARCH}))
 	useHotkeys("b", () =>   setUI({type:UIAction.TOGGLE_POPUP, popup:UIPopup.BOOKMARKS}))
 	useHotkeys("esc", () => popup ? setUI({type:UIAction.HIDE_POPUP, popup}) : setUI({type:UIAction.HIDE_INFO}), [popup]);
-	useHotkeys("right", () => router.push(`/page/${page + 1}`));
-	useHotkeys("left", () => router.push(`/page/${page - 1}`));
+	useHotkeys("right", () => goToPage(page + 1));
+	useHotkeys("left", () => goToPage(page - 1));
 	
 	return (
 		<>
@@ -50,12 +54,14 @@ export default function Page({ posts, images, page, totalPages, newest }) {
 				<title>Cihenema</title>
 			</Head>
 			<main className={cn(s.container, s.scroll)}>
-				<Gallery {...{ posts, setImageLoaded, post }} />
-				<InfoBox {...{ post}} />
-				<Pager {...{ nextPage, loading, page, setDeloading  }} />
-				<Search />
-				<Bookmarks />
 				<Loader loading={loading} deloading={deloading} />
+				<Gallery {...{ posts, setImageLoaded, post }} />
+				<Pager {...{ nextPage, loading, page, setDeloading, goToPage}} />
+				<Search {...{goToPage}}/>
+				<BookmarksProvider>
+					<InfoBox {...{ post}} />
+					<Bookmarks {...{goToPage}}/>
+				</BookmarksProvider>
 			</main>
 		</>
 	);

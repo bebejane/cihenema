@@ -16,7 +16,7 @@
 		color: rgb(225, 225, 225);
 		padding: calc(#{$padding} / 4);
 
-		@include mq($from: desktop) {
+		@include mq($from: tablet, $and: '(orientation: landscape)') {
 			padding: calc(#{$padding-big} / 4);
 		}
 		a {
@@ -33,17 +33,20 @@
 				font-family: "Noto Serif KR", serif;
 				font-size: $subheader-size;
 				flex: 0 1 100%;
-				@include mq($from: desktop) {
+				max-width: 100%;
+				overflow:hidden;
+				text-overflow: ellipsis;
+				@include mq($from: tablet, $and: '(orientation: landscape)') {
 					font-size: $subheader-size-big;
 				}
 				.director {
 					font-size: $text-size;
 					line-height: 2;
-					white-space: pre;
-					overflow: hidden;
+					max-width: 100%;
+					overflow:hidden;
 					text-overflow: ellipsis;
 					color: #aaaaaa;
-					@include mq($from: desktop) {
+					@include mq($from: tablet, $and: '(orientation: landscape)') {
 						font-size: $text-size-big;
 					}
 				}
@@ -65,7 +68,7 @@
 				width: 18px;
 				height: 18px;
 			}
-			@include mq($from: desktop) {
+			@include mq($from: tablet, $and: '(orientation: landscape)') {
 				opacity: 0.3;
 				min-width: calc(#{$padding-big} * 2);
 				margin-right: calc(#{$padding-big});

@@ -15,28 +15,33 @@ export default function GalleryImage({
 	onClick,
 }) {
 
-	const [effect, setEffect] = useState({})
+	const [effect, setEffect] = useState(undefined)
 	const { ref, inView, entry } = useInView({ threshold});
 	const {intersectionRatio : ratio} = entry || {}
-
+	
 	useEffect(()=>{
 		const scale = 1.0 + (ratio*0.1)
 		const effect = {transform:`scale(${scale})`}
 		setEffect(effect);
 	}, [ratio])
 	
-	
+	//if(ratio === undefined) return null
+
 	return (
-		<div
-			id={imdbId}
+		<section
 			key={index + "-" + imageIndex}
-			ref={ref}
+			id={imdbId}
 			className={cn(s.slide)}
+			ref={ref}
 			onClick={onClick}
 		>
 			<div className={s.wrap} >
-				<img src={src} onLoad={onLoad} style={effect}/>
+				<img 
+					src={src} 
+					onLoad={onLoad} 
+					style={effect}
+				/>
 			</div>
-		</div>
+		</section>
 	);
 }
