@@ -16,10 +16,10 @@ export default function Bookmarks({ }) {
 		}>
 			<ul className={s.list}>
 				{bookmarks.length ? bookmarks.map(({page, imdb, titleEnglish, title, director, year}, idx) => (
-					<li key={idx} className={s.item} onClick={(e) => setUI({type:UIAction.HIDE_POPUP, popup:UIPopup.BOOKMARKS})}>
+					<li key={idx} className={s.item} >
 						<Link href={`/page/${page}#${imdb}`} >
-							<a>
-								<div className={s.title}>
+							<a onClick={(e) => setUI({type:UIAction.HIDE_POPUP, popup:UIPopup.BOOKMARKS})}>
+								<div className={s.title} >
 									{titleEnglish || title}
 									<div className={s.director}>
 										{director} ({year})
@@ -27,7 +27,7 @@ export default function Bookmarks({ }) {
 								</div>
 							</a>
 						</Link>
-						<div className={s.delete} onClick={() => setBookmarks({type:'DELETE', id:imdb})}>
+						<div className={s.delete} onClick={(e) => setBookmarks({type:'DELETE', id:imdb})}>
 							<img src={"/images/minus.svg"} />
 						</div>
 					</li>

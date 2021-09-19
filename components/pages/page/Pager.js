@@ -3,6 +3,7 @@ import cn from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Circle from 'react-circle'
 
 export default function Pager({ handleLoad, nextPage, loading, page, goToPage }) {
 	const router = useRouter();
@@ -26,6 +27,7 @@ export default function Pager({ handleLoad, nextPage, loading, page, goToPage })
 				}
 				{loading && <div className={loadingStyle}></div>}
 			</a>
+			
 			{/*<Link href={`/page/${nextPage}`} ></Link>*/}
 		</nav>
 	);

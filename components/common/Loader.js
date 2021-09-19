@@ -13,7 +13,8 @@ export default function Loader({ loading, deloading }) {
 	const totalDuration = width > 767 ? 1000 : 2000;
 	const curve = 0.02;
 	
-	(process.browser ? useLayoutEffect : useEffect)	(()=>{
+	// Fixes server rendering warning
+	(process.browser ? useLayoutEffect : useEffect)(()=>{
 		const stripes = new Array(numStripes).fill({}).map((s, i) => {
 			const odd = i % 2 === 0;
 			const color = odd ? "rgb(255,0,0)" : "rgb(0,0,0)";

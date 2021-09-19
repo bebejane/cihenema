@@ -14,18 +14,15 @@ export default function GalleryImage({
 	onLoad,
 	onClick,
 }) {
+	const [effect, setEffect] = useState(undefined);
+	const { ref, inView, entry } = useInView({ threshold });
+	const { intersectionRatio: ratio } = entry || {};
 
-	const [effect, setEffect] = useState(undefined)
-	const { ref, inView, entry } = useInView({ threshold});
-	const {intersectionRatio : ratio} = entry || {}
-	
-	useEffect(()=>{
-		const scale = 1.0 + (ratio*0.1)
-		const effect = {transform:`scale(${scale})`}
+	useEffect(() => {
+		const scale = 1.0 + ratio * 0.1;
+		const effect = { transform: `scale(${scale})` };
 		setEffect(effect);
-	}, [ratio])
-	
-	//if(ratio === undefined) return null
+	}, [ratio]);
 
 	return (
 		<section
@@ -35,12 +32,8 @@ export default function GalleryImage({
 			ref={ref}
 			onClick={onClick}
 		>
-			<div className={s.wrap} >
-				<img 
-					src={src} 
-					onLoad={onLoad} 
-					style={effect}
-				/>
+			<div className={s.wrap}>
+				<img src={src} onLoad={onLoad} style={effect} />
 			</div>
 		</section>
 	);
