@@ -12,6 +12,7 @@ export async function getStaticProps(context) {
 			images,
 			totalPages: TOTAL_PAGES,
 			newest: true,
+			page:1
 		},
 	};
 }
