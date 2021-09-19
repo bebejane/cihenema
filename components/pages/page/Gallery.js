@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import s from "./Gallery.module.scss";
 import GalleryImage from "./GallaryImage";
 import { useRouter } from "next/router";
+import { useUI, UIAction } from "@/lib/context/ui";
 
 export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded }) {
 	const router = useRouter();
+	const [{showInfo, showBookmarks, showSearch}, setUI] = useUI()
 	const imdbId = router.asPath.includes("#")
 		? router.asPath.substring(router.asPath.indexOf("#") + 1)
 		: null;
@@ -27,7 +29,7 @@ export default function Gallery({ posts, post = {}, setShowInfo, setImageLoaded 
 				index={pidx}
 				imageIndex={idx}
 				onLoad={() => pidx === 0 && idx === 0 && setFirstLoaded(true)}
-				onClick={() => setShowInfo(false)}
+				onClick={() => setUI({type:UIAction.TOGGLE_INFO})}
 			/>
 		));
 	});

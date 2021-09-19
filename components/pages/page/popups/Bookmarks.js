@@ -2,17 +2,18 @@ import s from "./Bookmarks.module.scss";
 import Link from "next/link";
 import PopUp from "./PopUp";
 import { useEffect, useState, useContext } from "react";
-import { BookmarksContext } from "@/lib/context/bookmarks";
+import { useBookmarks } from "@/lib/context/bookmarks";
+import { useUI, UIAction, UIPopup } from "@/lib/context/ui";
 
-export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
-	const {bookmarks, dispatch} = useContext(BookmarksContext);
-	if (!showBookmarks) return null;
-	
+export default function Bookmarks({ }) {
+	const [bookmarks, setBookmarks] = useBookmarks()
+	const [{popup}, setUI] = useUI();
+
 	return (
-		<PopUp header={"Bookmarks"} show={showBookmarks} setShow={setShowBookmarks}>
+		<PopUp header={"Bookmarks"} show={popup === UIPopup.BOOKMARKS} type={UIPopup.BOOKMARKS}>
 			<ul className={s.list}>
-				{bookmarks.length ? bookmarks.map((m) => (
-					<li className={s.item}>
+				{bookmarks.length ? bookmarks.map((m, idx) => (
+					<li key={idx} className={s.item}>
 						<Link href={`/page/${m.page}#${m.imdb}`} prefetch={true}>
 							<a>
 								<div className={s.title}>
@@ -23,7 +24,7 @@ export default function Bookmarks({ showBookmarks, setShowBookmarks }) {
 								</div>
 							</a>
 						</Link>
-						<div className={s.delete} onClick={() => dispatch({id:m.imdb, type:'DELETE'})}>
+						<div className={s.delete} onClick={() => setBookmarks({id:m.imdb, type:'DELETE'})}>
 							<img src={"/images/minus.svg"} />
 						</div>
 					</li>

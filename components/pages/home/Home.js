@@ -28,7 +28,7 @@ const introAnimation = {
 const duration = 6;
 
 export default function Home({ totalPages }) {
-	const [pwa] = usePWA();
+	const [pwaState] = usePWA(true);
 	const [randomPage] = useState(Math.ceil(Math.random() * totalPages));
 	const router = useRouter();
 	const [renderKey, setRenderKey] = useState(1);
@@ -40,7 +40,6 @@ export default function Home({ totalPages }) {
 	};
 	useEffect(() => {
 		setTimeout(() => router.push(`/page/${randomPage}`), duration * 1000 + 300);
-
 	}, []);
 	
 	return (

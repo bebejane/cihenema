@@ -1,17 +1,18 @@
 import s from "./Search.module.scss";
 import Link from "next/link";
 import PopUp from "./PopUp";
+import { useUI, UIAction, UIPopup } from "@/lib/context/ui";
 import useSearch from "@/lib/hooks/useSearch";
 import { useRef } from "react";
 
-export default function Search({ showSearch, setShowSearch }) {
-	if (!showSearch) return null;
-
+export default function Search({ }) {
+	
+	const [{popup}, setUI] = useUI();
 	const searchRef = useRef();
 	const [search, setSearch] = useSearch();
-
+	
 	return (
-		<PopUp header={"Search"} show={showSearch} setShow={setShowSearch}>
+		<PopUp header={"Search"} show={popup === UIPopup.SEARCH} type={UIPopup.SEARCH}>
 			<form className={s.searchForm} onSubmit={(e) => e.preventDefault()}>
 				<input
 					type="text"

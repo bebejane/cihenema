@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useWindowSize } from "@react-hook/window-size";
 
 export default function Loader({ loading, deloading }) {
+	
 	const [loader, setLoader] = useState("loading");
 	const [animated, setAnimated] = useState(0);
 	const [width, height] = useWindowSize();
