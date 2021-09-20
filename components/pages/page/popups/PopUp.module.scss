@@ -1,5 +1,4 @@
 .popup {
-	display: none;
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -10,16 +9,24 @@
 	box-sizing: border-box;
 	z-index: 300;
 	padding: calc(#{$padding});
-	
 	@include mq($from: tablet, $and: '(orientation: landscape)') {
 		padding: calc(#{$padding}* 4);
+	}
+	&.hidden{
+		display: none;
+	}
+	&.enter{
+		animation: enter 0.2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+	}
+	&.exit{
+		animation: exit 0.2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 	}
 	.wrap {
 		display: flex;
 		flex-direction: column;
 		padding: calc(#{$padding});
 		color: red;
-		border: 10px solid rgb(255, 0, 0);
+		border: 5px solid rgb(255, 0, 0);
 		background-color: rgba(0, 0, 0, 0.95);
 		height: 100%;
 		@include mq($from: tablet, $and: '(orientation: landscape)') {
@@ -79,24 +86,13 @@
 		}
 	}
 	
-	transform: scale(0);
-	&.enter{
-		animation: enter 0.2s linear forwards;
-	}
-	&.exit{
-		animation: exit 0s linear forwards;
-	}
 }
 
 
 
 @keyframes enter {
 	0%{
-		transform: scale(0.01);
-	}
-	30%{
-		transform: scale(1.03);
-		
+		transform: scale(0.01) ;
 	}
 	100%{
 		transform: scale(1);	
@@ -108,6 +104,6 @@
 		transform: scale(0.99);
 	}
 	100%{
-		transform: scale(0);	
+		transform: scale(0);
 	}
 }

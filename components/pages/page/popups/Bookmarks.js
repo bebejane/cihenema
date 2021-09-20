@@ -16,7 +16,7 @@ export default function Bookmarks({ }) {
 		}>
 			<ul className={s.list}>
 				{bookmarks.length ? bookmarks.map(({page, imdb, titleEnglish, title, director, year}, idx) => (
-					<li key={idx} className={s.item} >
+					<li key={'bm-'+idx} className={s.item} >
 						<Link href={`/page/${page}#${imdb}`} >
 							<a onClick={(e) => setUI({type:UIAction.HIDE_POPUP, popup:UIPopup.BOOKMARKS})}>
 								<div className={s.title} >
